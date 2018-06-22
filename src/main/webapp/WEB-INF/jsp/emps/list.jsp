@@ -132,7 +132,7 @@ $(function() {// 初始化内容
         </div>
         <!-- 按钮 -->
         <div class="row">
-              <a class="btn btn-primary" href="exportStu">导出数据为excel</a>
+              <a class="btn btn-primary" href="export">导出数据为excel</a>
             <div class="col-md-4 col-md-offset-8">
                 <button class="btn btn-sm btn-info pull-right" id="emp_add_modal_btn">新增</button>
                 <button class="btn btn-sm btn-danger pull-right" id="emp_delete_all_btn">删除</button>

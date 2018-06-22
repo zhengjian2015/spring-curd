@@ -1,11 +1,16 @@
 package com.zj.curd.controller;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +37,7 @@ public class EmployeeController {
     public String getIndex(){  
 		
         return "index";  
-    }  
+    }
 	
 	@RequestMapping(value="/emps-json",method=RequestMethod.GET)  
     @ResponseBody
@@ -47,8 +52,7 @@ public class EmployeeController {
 	
 	@RequestMapping(value="/emps",method=RequestMethod.GET)  
     public String getEmps(@RequestParam(value = "pn", defaultValue = "1") Integer pn,
-			Model model){  
-		System.out.println("3333333333333");
+			Model model) {
         //Collection<Emp> emptList = empService.getEmps();
         PageHelper.startPage(pn, 5);
         System.out.println(pn);
@@ -109,5 +113,16 @@ public class EmployeeController {
 		}
 	       System.out.println(num);
         return jsonObject;  
-    }  
+    }
+	
+	@RequestMapping(value="/export")
+	public void exportExcel(HttpServletResponse response)  throws Exception{
+		InputStream is=empService.exportEmployee();
+		response.setContentType("application/vnd.ms-excel");
+        response.setHeader("contentDisposition", "attachment;filename=AllUsers.xls");
+        ServletOutputStream output = response.getOutputStream();
+        IOUtils.copy(is,output);
+	}
+	
+	
 }
