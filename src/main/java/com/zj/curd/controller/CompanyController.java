@@ -1,0 +1,56 @@
+package com.zj.curd.controller;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.zj.curd.pojo.Company;
+import com.zj.curd.pojo.Department;
+import com.zj.curd.service.ICompanyService;
+import com.zj.curd.service.ImportService;
+
+@Controller
+public class CompanyController {
+	
+	@Resource
+	private ICompanyService companyService;
+	
+	@Resource
+	private ImportService importService;
+	
+	
+	@RequestMapping(value="/indexs",method=RequestMethod.GET) 
+    public String index(){  
+        return "company/index";  
+    } 
+	
+	@RequestMapping(value="/companys",method=RequestMethod.GET) 
+	@ResponseBody
+    public String getCompanyList(){  
+		String json= companyService.getCompanystoJson();
+        return json;
+    }
+	
+	@RequestMapping(value="/improtExcel",method=RequestMethod.POST) 
+	@ResponseBody
+	public Map improtExcel(@RequestParam(value="uploadFile") MultipartFile file){  
+		Map<String,Object> map = new HashMap<String, Object>();
+		map = importService.readExcelFile(file);  
+		return map;
+    }
+
+
+}

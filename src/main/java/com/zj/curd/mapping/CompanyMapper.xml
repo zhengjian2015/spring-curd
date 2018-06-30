@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.curd.dao.ICompanyDao" >
+
+<sql id="company_all_column">
+        company_id,
+        company_name,
+        company_address,
+        company_income,
+        company_logo,
+        company_sort
+    </sql>
+   <!--获取所有公司信息-->
+   <select id="getCompanys" resultType="com.zj.curd.pojo.Company">
+       SELECT 
+       <include refid="company_all_column"/>
+       FROM  company
+   </select>
+   
+   <insert id="insertCompanys">
+	  insert into company (company_name, company_address, company_income, company_logo,company_sort) values
+	  <foreach item="item" collection="list" separator=",">
+	    (#{item.companyName}, #{item.companyAddress}, #{item.companyIncome}, #{item.companyLogo},#{item.companySort})
+	  </foreach>
+	</insert>
+	
+	
+	<delete id="deleteAll">
+  		delete from company
+	</delete>
+	
+	
+	<select id="selectCompany" parameterType="Integer" resultType="com.zj.curd.pojo.Company">
+  		SELECT * FROM company WHERE company_id = #{id}
+	</select>
+	
+	<update id="updateCompany" parameterType="com.zj.curd.pojo.Company">
+		update company set company_name = #{companyName}, 
+		company_address = #{companyAddress},
+        company_income = #{companyIncome},
+        company_logo = #{companyLogo},
+        company_sort = #{companySort} where 
+        company_id = #{companyId}
+	</update>
+	
+</mapper>
