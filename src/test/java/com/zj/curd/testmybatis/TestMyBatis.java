@@ -19,6 +19,7 @@ public class TestMyBatis {
 	private static Logger logger = Logger.getLogger(TestMyBatis.class); 
 	@Resource
 	private IDepartmentService departmentService = null;  
+	/*
 	@Test
 	public void testCRUD(){
 		int a = departmentService.addDepartment(new Department(null,"¿ª·¢²¿"));
@@ -40,5 +41,5 @@ public class TestMyBatis {
 			logger.info(dept);
 		}
     }
-	
+	*/
 }

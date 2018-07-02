@@ -84,8 +84,8 @@ public class TestService {
 		
 	}*/
 	
-	@Test
+	/*@Test
 	public void testUpdateCompany() {
 		importService.updateExcelFile();
-	}
+	}*/
 }

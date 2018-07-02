@@ -25,21 +25,21 @@ public class TestEmp {
 	@Resource
 	private IEmpService empService; 
 	
+	/*
 	@Test
 	public void testCRUD(){
 		empService.saveEmployee(new Emp(null, "Molly", "M", "Molly@lvoyee.com", 5));
 	}
-	
+	*/
+	/*
 	@Test
 	public void testCRUD2(){
 		
 		 PageHelper.startPage(2,4);    
-		List<Emp> emps = empService.getEmps();
-		 System.out.println(emps.size());
-		//logger.info(emps);
-		// PageHelper.startPage(pn,5);    
-	      //使用PageInfo包装查询结果，只需要将pageInfo交给页面就可以  
+		 List<Emp> emps = empService.getEmps();
+		 System.out.println(emps.size()); 
 	     PageInfo pageInfo = new PageInfo<>(emps,5); 
 	     System.out.println(pageInfo);
 	}
+	*/
 }
