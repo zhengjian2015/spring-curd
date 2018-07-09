@@ -140,7 +140,7 @@
                     if(data.code==0) {
                         alert(data.msg);
                     } else {
-                        window.location.href="${pageContext.request.contextPath}/admin";
+                        window.location.href="${pageContext.request.contextPath}/indexs";
                     }
                 },
                 error: function () {

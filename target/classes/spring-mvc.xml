@@ -78,5 +78,13 @@
     <!-- 处理静态资源 -->
 	<mvc:resources location="/lib/" mapping="/lib/**"></mvc:resources>
 	
+	 <mvc:interceptors>
+       
+        <mvc:interceptor>
+            <mvc:mapping path="/indexs"/>
+            <bean class="com.zj.curd.Interceptor.SecurityInterceptor"/>
+        </mvc:interceptor>
+    
+    </mvc:interceptors>
 	
 </beans>
