@@ -10,5 +10,7 @@ public interface ICompanyService  {
 	 
 	 public String getCompanystoJson();
 	 
+	 public List<Company> getCompanys();
+	 
 
 }

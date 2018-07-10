@@ -1,6 +1,8 @@
 package com.zj.curd.pojo;
 
-public class Company {
+import java.io.Serializable;
+
+public class Company implements Serializable{
 	private Integer companyId;
 	private String companyName;
 	private String companyAddress;

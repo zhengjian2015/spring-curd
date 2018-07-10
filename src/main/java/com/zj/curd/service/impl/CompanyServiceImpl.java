@@ -39,6 +39,12 @@ public class CompanyServiceImpl implements ICompanyService {
 		String json = new Gson().toJson(info);
 		return json;
 	}
+	@Override
+	public List<Company> getCompanys() {
+		// TODO Auto-generated method stub
+		List<Company> companyList = companyDao.getCompanys();
+		return companyList;
+	}
 	
 
 
