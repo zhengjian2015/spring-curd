@@ -48,6 +48,8 @@
         #backtoblog a, #nav a {
             color: #fff !important;
         }
+        
+        label.error {float: none;color:red;padding-left: .5em;vertical-align: top;}
 
     </style><meta name='robots' content='noindex,follow' />
     <meta name="viewport" content="width=device-width" />
@@ -115,8 +117,12 @@
 <div class="clear"></div>
 
 <script src="${pageContext.request.contextPath}/lib/assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js//localization/messages_zh.js"></script>
 <script type="text/javascript">
-
+$(function() {
+    $("#loginForm").validate();
+});
 
     <%--登录验证--%>
     $("#submit-btn").click(function () {
