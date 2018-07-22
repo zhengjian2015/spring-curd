@@ -10,7 +10,12 @@ public interface IEmpService {
 	
 	public int saveEmployee(Emp emp);
 	
+	
 	public void deleteEmployee(Integer id);
 	
 	public InputStream exportEmployee() throws Exception;
+	
+	public Emp selectByPrimaryKey(Integer empId);
+
+	int updateByPrimaryKey(Emp emps);
 }

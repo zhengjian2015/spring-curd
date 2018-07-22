@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,7 +57,6 @@ public class EmployeeController {
 			Model model) {
         //Collection<Emp> emptList = empService.getEmps();
         PageHelper.startPage(pn, 5);
-        System.out.println(pn);
 		// startPage后面紧跟的这个查询就是一个分页查询
         List<Emp> emptList = empService.getEmps();
 		// 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
@@ -63,7 +64,16 @@ public class EmployeeController {
 		PageInfo page = new PageInfo(emptList, 6);
 		model.addAttribute("pageInfo", page);
         return "emps/list";  
-    }  
+    }
+	
+	@RequestMapping(value="/emp/{id}",method=RequestMethod.GET)
+	@ResponseBody
+	public Emp getEmp(@PathVariable("id") String id) {
+		Integer ids = Integer.valueOf(id);
+		Emp emp = empService.selectByPrimaryKey(ids);
+		return emp;
+		
+	}
 	
 	/**
 	 * 单个批量二合一
@@ -93,15 +103,31 @@ public class EmployeeController {
 		return map;
 	}
 	
+	@RequestMapping(value="/emp2/{ids}",method=RequestMethod.POST)
+	@ResponseBody
+    public JSONObject updateEmps(@PathVariable("ids") String ids,Emp emp) {
+		Integer empId = Integer.valueOf(ids);
+		emp.setEmpId(empId);
+		JSONObject jsonObject = new JSONObject();
+		int num = 0;
+		try {
+	        num = empService.updateByPrimaryKey(emp);
+	        if (num != 0) {
+	        	jsonObject.put("code", "200");
+	        }
+		} catch(Exception e) {
+			e.printStackTrace();  
+			jsonObject.put("message","err");
+		}
+        return jsonObject;  
+    }
+	
 	@RequestMapping(value="/emps",method=RequestMethod.POST)
 	@ResponseBody
-    public JSONObject saveEmps(Emp emp){  
-		System.out.println(emp);
-		emp.setdId(9);
+    public JSONObject saveEmps(Emp emp) {
         //Collection<Emp> emptList = empService.getEmps();
 		JSONObject jsonObject = new JSONObject();
-		
-		 int num = 0;
+		int num = 0;
 		try {
 	        num = empService.saveEmployee(emp);
 	        if (num != 0) {
@@ -111,9 +137,9 @@ public class EmployeeController {
 			e.printStackTrace();  
 			jsonObject.put("message","err");
 		}
-	       System.out.println(num);
         return jsonObject;  
     }
+	
 	
 	@RequestMapping(value="/export")
 	public void exportExcel(HttpServletResponse response)  throws Exception{

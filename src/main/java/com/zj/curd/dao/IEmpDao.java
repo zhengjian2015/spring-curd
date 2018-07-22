@@ -97,4 +97,6 @@ public interface IEmpDao {
     int updateByPrimaryKey(Emp record);
     
     List<Emp> getEmpAll();
+
+
 }

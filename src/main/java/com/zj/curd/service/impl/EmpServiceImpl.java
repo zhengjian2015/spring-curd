@@ -55,7 +55,17 @@ public class EmpServiceImpl implements IEmpService{
 		in = ex.export();
 		return in;
 	}
-	
+	@Override
+	public Emp selectByPrimaryKey(Integer empId) {
+		// TODO Auto-generated method stub
+		Emp emp = empDao.selectByPrimaryKey(empId);
+		return emp;
+	}
+	@Override
+	public int updateByPrimaryKey(Emp emps) {
+		// TODO Auto-generated method stub
+		return empDao.updateByPrimaryKey(emps);
+	}
 	
 
 }

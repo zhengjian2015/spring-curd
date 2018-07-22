@@ -42,4 +42,9 @@ public class TestEmp {
 	     System.out.println(pageInfo);
 	}
 	*/
+	@Test
+	public void testEmp() {
+		Emp emp = empService.selectByPrimaryKey(3);
+		logger.debug(emp);
+	}
 }
