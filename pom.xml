@@ -15,6 +15,11 @@
     </properties> 
     
     <dependencies>
+    	<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-core</artifactId>
+		    <version>1.4.0</version>
+		</dependency>
     	<!-- spring-redis实现 -->
         <dependency>
             <groupId>org.springframework.data</groupId>
