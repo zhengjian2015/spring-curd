@@ -22,7 +22,7 @@ public class ThreadPoolExcuteController {
     @ResponseBody
     public void execute(){
         taskExecutor.execute(new Runnable(){
-
+        	
             public void run() {
                 try {
                     LOG.info("执行线程任务开始前");
@@ -37,5 +37,12 @@ public class ThreadPoolExcuteController {
             
         });
     }
+    
+    @RequestMapping("/loopQueryTicket")
+	public void loopQueryTicket(){
+		QueryTicket queryTicket=new QueryTicket("zhagnsan", 3, 5);
+		taskExecutor.execute(queryTicket);
+	}
+
 
 }

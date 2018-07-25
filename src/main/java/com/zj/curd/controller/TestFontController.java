@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-public class TestJQueryController {
+public class TestFontController {
 
 	@RequestMapping("/testajax")
 	public String testjq(){  
@@ -15,5 +15,12 @@ public class TestJQueryController {
 	@RequestMapping("/testajax2")
 	public String testjq2(){  
         return "test/testjq2";  
-    } 
+    }
+	
+	@RequestMapping("/vuedemo")
+	public String vuedemo(){  
+        return "test/vue_demo";  
+    }
+	
+	
 }

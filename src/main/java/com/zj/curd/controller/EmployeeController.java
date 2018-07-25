@@ -143,7 +143,7 @@ public class EmployeeController {
 	
 	@RequestMapping(value="/export")
 	public void exportExcel(HttpServletResponse response)  throws Exception{
-		InputStream is=empService.exportEmployee();
+		InputStream is= empService.exportEmployee();
 		response.setContentType("application/vnd.ms-excel");
         response.setHeader("contentDisposition", "attachment;filename=AllUsers.xls");
         ServletOutputStream output = response.getOutputStream();
