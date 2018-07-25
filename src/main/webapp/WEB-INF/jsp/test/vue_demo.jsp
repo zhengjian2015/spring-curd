@@ -8,13 +8,22 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/vue.min.js"></script>
 <div id="app">
 	<p>{{message}}</p>
+	<a v-bind:href="url">百度</a>
+	<a v-on:click="doSomething">动作</a>
+	<input type="text" v-model="message" />
 </div>
 <script type="text/javascript">
 
 new Vue({
 	el:"#app",
 	data:{
-		message:"Hello Vue!"
+		message:"Hello Vue!",
+		url:"http://www.baidu.com"
+	},
+	methods:{
+		doSomething:function(){
+			console.log('doSomething...');
+		}
 	}
 });
 </script>
