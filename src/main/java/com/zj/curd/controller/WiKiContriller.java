@@ -45,4 +45,9 @@ public class WiKiContriller {
 		modelAndView.setViewName("/wiki/wkv2");
 		return modelAndView;
 	}
+	
+	@RequestMapping("/wkedit")
+	public String addArticle() {
+		return "wiki/wkedit";
+	}
 }
