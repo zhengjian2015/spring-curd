@@ -17,6 +17,7 @@
 	
 	<typeAliases>
 		<package name="com.zj.crud.pojo"/>
+		<package name="com.zj.crud.entity"/>
 	</typeAliases>
 	
 	<plugins>

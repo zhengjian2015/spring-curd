@@ -1,0 +1,19 @@
+tr>td.name{
+    width: 20%
+}
+
+tr>td.size{
+    width: 5%
+}
+
+tr>td.progress_{
+    width: 15%
+}
+
+tr>td.start{
+    width: 10%
+}
+
+tr>td.cancel{
+    width: 10%
+}

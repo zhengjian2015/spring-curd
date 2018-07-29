@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zj.curd.dao.WikiArticlesDao" >
+
+ <sql id="article_table_all_columns">
+        ART_ID,
+        ART_TITLE,
+        ART_KEYWORDS,
+        ART_CONTENT,
+        CREATE_USER,
+        CREATE_TIME,
+        UPDATE_USER,
+        UPDATE_TIME,
+        STATUS,
+        MATCH_TIMES,
+        SUPPORT_TIMES,
+        OPPOSE_TIMES,
+        CANMODI_USERS
+    </sql>
+    
+    
+    <resultMap id="ArticleResult" type="com.zj.curd.entity.WkArticles">
+        <id property="artId" column="ART_ID"/>
+        <result property="artTitle" column="ART_TITLE"/>
+        <result property="artKeywords" column="ART_KEYWORDS"/>
+        <result property="artContent" column="ART_CONTENT"/>
+        <result property="createUser" column="CREATE_USER"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateUser" column="UPDATE_USER"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <result property="status" column="STATUS"/>
+        <result property="mathchTimes" column="MATCH_TIMES"/>
+        <result property="supportTimes" column="SUPPORT_TIMES"/>
+        <result property="opposeTimes" column="OPPOSE_TIMES"/>
+        <result property="canmodiUsers" column="CANMODI_USERS"/>
+    </resultMap>
+
+	<!--获得所有文章-->
+    <select id="ListArticles" resultMap="ArticleResult" parameterType="java.lang.Integer">
+        SELECT
+        <include refid="article_table_all_columns"/>
+        FROM
+        WK_ARTICLES
+        <where>
+            <if test="status!=null">
+                STATUS=#{status}
+            </if>
+        </where>
+        ORDER BY UPDATE_TIME DESC
+    </select>
+    
+    <!--查看文章-->
+    <select id="getArticleById" parameterType="java.lang.String" resultMap="ArticleResult">
+		SELECT <include refid="article_table_all_columns"/>
+		FROM
+        WK_ARTICLES  WHERE ART_ID=#{artId}
+	</select>
+
+</mapper>
