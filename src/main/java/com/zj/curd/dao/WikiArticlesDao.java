@@ -10,4 +10,6 @@ public interface WikiArticlesDao {
 	List<WkArticles> ListArticles(@Param(value="status") Integer status);
 	
 	WkArticles getArticleById(@Param(value="artId") String artId);
+	
+	int saveArticle(WkArticles WkArticle);
 }

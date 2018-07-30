@@ -1,6 +1,8 @@
 package com.zj.curd.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -31,6 +33,20 @@ public class WikiArticlesServiceImpl implements WikiArticlesService{
 		WkArticles wkArticles = wikiArticlesDao.getArticleById(artId);
 		
 		return wkArticles;
+	}
+
+	@Override
+	public Map saveWkArticle(WkArticles wkArticle) {
+		// TODO Auto-generated method stub
+		Map<String,Object>  map = new HashMap<>();
+		int i = wikiArticlesDao.saveArticle(wkArticle);
+		map.put("code", 101);
+		map.put("msg", "Ê§°Ü");
+		if (i >0) {
+		map.put("code", 200);
+		map.put("msg", "³É¹¦");
+		}
+		return map;
 	}
 
 }

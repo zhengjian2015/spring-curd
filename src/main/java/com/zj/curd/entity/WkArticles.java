@@ -8,9 +8,9 @@ public class WkArticles {
 	private String artKeywords;
 	private String artContent;
 	private String createUser;
-	private Date   createTime;
-	private String updateUser;
-	private Date   updateTime;
+	private String  createTime;
+	private String  updateUser;
+	private String  updateTime;
 	private Integer status;
 	private Integer mathchTimes;
 	private Integer supportTimes;
@@ -51,10 +51,10 @@ public class WkArticles {
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 	public String getUpdateUser() {
@@ -63,10 +63,10 @@ public class WkArticles {
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
 	}
-	public Date getUpdateTime() {
+	public String getUpdateTime() {
 		return updateTime;
 	}
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
 	public Integer getStatus() {

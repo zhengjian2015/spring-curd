@@ -7,10 +7,14 @@
 <title>新建文章</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/lib/wiki/static/css/style.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/lib/wiki/static/css/editormd.min.css" />
+<style type="text/css">
+	.thisInput {height:31px; padding: 8px;}
+</style>
 </head>
 <body>
 	<br>
 	<div id="layout" style="margin-left:8px;margin-right:8px;">
+	    <input type="hidden" id="pacher" value="${pageContext.request.contextPath}">
 		<input type="text" class="thisInput" id="ART_TITLE" name="ART_TITLE" size="50" value="" placeholder="标题">
 		<input type="text" class="thisInput" id="ART_KEYWORDS" name="ART_KEYWORDS" size="50" value="" placeholder="关键字">
 		<button class="btn" onclick="javascript:saveArticle()">保存</button>
@@ -26,8 +30,10 @@
     <script src="${pageContext.request.contextPath}/lib/wiki/static/editormd.min.js"></script>
 	<script type="text/javascript">
 	var testEditor;
+	var path;
     jQuery(function() {
         var markdoc = jQuery('#ART_CONTENT').val();
+        path = $("#pacher").val();
         testEditor = editormd("test-editormd", {
             width: "100%",
             height: 710,
@@ -79,22 +85,22 @@
             alert('正文不能为空！');
             return;
         }
-        var inData = {"ART_ID":jQuery('#ART_ID').val(), "ART_TITLE":jQuery("#ART_TITLE").val(), "ART_KEYWORDS":jQuery("#ART_KEYWORDS").val(), "ART_CONTENT":testEditor.getMarkdown() };
+        var inData = {"artId":jQuery('#ART_ID').val(), "artTitle":jQuery("#ART_TITLE").val(), "artKeywords":jQuery("#ART_KEYWORDS").val(), "artContent":testEditor.getMarkdown() };
         jQuery.ajax({
             type: "POST",
-            url: "./rst/art",
+            url: path+"/wiki/art",
             data: inData,
             async: false,
             error: ajaxErrorHandle,
-            success: function(json) {
-                data = JSON.parse(json);
-                if (data.ERROR) {
-                    alert(data.ERROR)
-                } else if (data.ART_ID) {
+            success: function(data) {
+                console.log(data);
+                if (data.code=200) {
+                    alert(data.msg);
+                } /* else if (data.ART_ID) {
                     jQuery('#ART_ID').val(data.ART_ID)
-                }
-                if (data.MSG) {
-                    alert(data.MSG)
+                } */
+                if (data.code!=200) {
+                    alert(data.msg);
                 }
             }
         });

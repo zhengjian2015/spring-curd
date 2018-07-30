@@ -55,5 +55,11 @@
 		FROM
         WK_ARTICLES  WHERE ART_ID=#{artId}
 	</select>
-
+	
+	<insert id="saveArticle" parameterType="com.zj.curd.entity.WkArticles" >
+		insert into WK_ARTICLES (ART_ID,ART_TITLE,ART_KEYWORDS,ART_CONTENT,CREATE_USER,
+		CREATE_TIME,UPDATE_USER,UPDATE_TIME,STATUS,MATCH_TIMES,SUPPORT_TIMES,OPPOSE_TIMES,CANMODI_USERS)
+  		values (#{artId},#{artTitle},#{artKeywords},#{artContent},#{createUser},#{createTime},#{updateUser},#{updateTime},
+  		#{status},#{mathchTimes},#{supportTimes},#{opposeTimes},#{canmodiUsers})
+	</insert>
 </mapper>

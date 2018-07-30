@@ -27,8 +27,6 @@ public class ImportServiceImpl implements ImportService {
 		//创建处理EXCEL的类  
 		ReadExcel readExcel = new ReadExcel();
 		List<Map<String, Object>> userList = readExcel.getExcelInfo(file);
-		System.out.println("****************");
-		System.out.println(userList);
 		//插入前先删除全部的
 		companyDao.deleteAll();
 		//int a = 1/0;

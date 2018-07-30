@@ -85,6 +85,11 @@
             <mvc:mapping path="/indexs"/>
             <bean class="com.zj.curd.Interceptor.SecurityInterceptor"/>
         </mvc:interceptor>
+        
+        <mvc:interceptor>
+            <mvc:mapping path="/wiki/**"/>
+            <bean class="com.zj.curd.Interceptor.SecurityInterceptor"/>
+        </mvc:interceptor>
     
     </mvc:interceptors>
 	
