@@ -12,4 +12,8 @@ public interface WikiArticlesDao {
 	WkArticles getArticleById(@Param(value="artId") String artId);
 	
 	int saveArticle(WkArticles WkArticle);
+	
+	int updateArticle(WkArticles WkArticle);
+	
+	int deleteArticle(@Param(value="artId") String artId);
 }

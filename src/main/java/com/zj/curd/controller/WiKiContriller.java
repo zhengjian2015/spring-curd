@@ -68,6 +68,8 @@ public class WiKiContriller {
         article.setCreateTime(df.format(new Date()));
 		String userName = user.getUserName();
 		article.setCreateUser(userName);
+		article.setUpdateUser(userName);
+		article.setUpdateTime(df.format(new Date()));
 		article.setStatus(0);
 		String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
 		article.setArtId(uuid);
@@ -76,5 +78,42 @@ public class WiKiContriller {
 		map = wikiArticlesService.saveWkArticle(article);
 		System.out.println(map);
 		return map;
+	}
+	
+	@RequestMapping(value="/art/{id}",method=RequestMethod.POST)
+	@ResponseBody
+	public Map updateArticle(@PathVariable(value="id") String artId,WkArticles article,HttpServletRequest request) {
+		User user = (User) request.getSession().getAttribute("user");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        article.setCreateTime(df.format(new Date()));
+		String userName = user.getUserName();
+		article.setArtId(artId);
+		article.setUpdateUser(userName);
+		article.setUpdateTime(df.format(new Date()));
+		article.setStatus(0);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map = wikiArticlesService.updateArticle(article);
+		System.out.println(map);
+		return map;
+	}
+	
+	@RequestMapping(value="/art/{id}",method=RequestMethod.DELETE)
+	@ResponseBody
+	public Map deleteArticle(@PathVariable(value="id") String artId) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map = wikiArticlesService.deleteArticle(artId);
+		System.out.println(map);
+		return map;
+	}
+	
+	//编辑回写
+	@RequestMapping(value="/wkedit/{id}",method=RequestMethod.GET)
+	public ModelAndView showArticle(@PathVariable(value="id") String id) {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		WkArticles artldata = wikiArticlesService.getWkArticle(id);
+		modelAndView.addObject("artldata",artldata);
+		modelAndView.setViewName("/wiki/wkedit");
+		return modelAndView;
 	}
 }

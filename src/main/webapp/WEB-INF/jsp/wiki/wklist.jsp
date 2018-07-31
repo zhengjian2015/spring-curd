@@ -8,13 +8,35 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>文章列表</title>
-
+<script src="${pageContext.request.contextPath}/lib/js/jquery-3.3.1.min.js"></script>
 <link href="${pageContext.request.contextPath}/lib/wiki/plugins/bootstrap/css/bootstrap.min.dong.css" rel="stylesheet" type="text/css"/>
 <link href="${pageContext.request.contextPath}/lib/wiki/plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
 <link href="${pageContext.request.contextPath}/lib/wiki/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="${pageContext.request.contextPath}/lib/wiki/css/style-metro.min.css" rel="stylesheet" type="text/css"/>
 <link href="${pageContext.request.contextPath}/lib/wiki/css/style.dong.min.css" rel="stylesheet" type="text/css"/>
 <link href='${pageContext.request.contextPath}/lib/wiki/css/pages/blog.css'  rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+function delAction(id) {
+	var path = $("#mypath").val();
+    if (id && id != "") {
+        if (confirm("确定要删除这篇文章吗？")) {
+            jQuery.ajax({
+                type: "DELETE",
+                url: path+"/wiki/art/"+id,
+                async: false,
+                success: function(data) {
+                	if (data.code!=200) {
+                        alert(data.msg);
+                    }else {
+                        alert('删除成功！');
+                        location.reload();
+                    }
+                }
+            });
+        }
+    }
+}
+</script>
 </head>
 <body>
 <div class="container-fluid">
@@ -42,8 +64,8 @@
 							<div class="span6 blog-tag-data-inner">
 								<ul class="unstyled inline">
 									<li><a href="#" class="tooltips" data-original-title="aaa"><i class="icon-group"></i> 权限</a></li>
-									<li><a href="javascript:delAction(12)"><i class="icon-trash"></i> 删除</a></li>
-									<li><a href="#"><i class="icon-edit"></i> 编辑</a></li>
+									<li><a href="javascript:delAction('${a.artId}')"><i class="icon-trash"></i> 删除</a></li>
+									<li><a href="${pageContext.request.contextPath}/wiki/wkedit/${a.artId}"><i class="icon-edit"></i> 编辑</a></li>
 									<li><i class="icon-user"></i>${a.updateUser}</li>
                                     <li><i class="icon-calendar"></i>${a.updateTime}</li>
 								</ul>
@@ -51,11 +73,13 @@
 						</div>
 						<p>${a.artTitle}</p>
 					</div>
+					<input type="hidden" value="${pageContext.request.contextPath}" id="mypath"/>
 				</div>
 				<hr style="margin-top: 0px !important">
 			</c:forEach>
 			</div>
 			<!--end span9-->
+			<%@ include file="wkside.jsp"%>
 			
 		</div>
 		<div class="pagination">

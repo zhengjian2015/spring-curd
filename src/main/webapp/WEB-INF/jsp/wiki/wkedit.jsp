@@ -15,19 +15,21 @@
 	<br>
 	<div id="layout" style="margin-left:8px;margin-right:8px;">
 	    <input type="hidden" id="pacher" value="${pageContext.request.contextPath}">
-		<input type="text" class="thisInput" id="ART_TITLE" name="ART_TITLE" size="50" value="" placeholder="标题">
-		<input type="text" class="thisInput" id="ART_KEYWORDS" name="ART_KEYWORDS" size="50" value="" placeholder="关键字">
+		<input type="text" class="thisInput" id="ART_TITLE" name="ART_TITLE" size="50" value="${artldata.artTitle}" placeholder="标题">
+		<input type="text" class="thisInput" id="ART_KEYWORDS" name="ART_KEYWORDS" size="50" value="${artldata.artKeywords}" placeholder="关键字">
 		<button class="btn" onclick="javascript:saveArticle()">保存</button>
 	    <button class="btn" onclick="javascript:history.go(-1)">取消</button>
 	    <br><br>
 	    <div class="row-fluid">
 	        <div id="test-editormd">
-	            <textarea style="display:none;" id="ART_CONTENT" name="ART_CONTENT"></textarea>
+	            <textarea style="display:none;" id="ART_CONTENT" name="ART_CONTENT">${artldata.artContent}</textarea>
+	        	<input type="hidden" value="${artldata.artId}" id="artid"/>
 	        </div>
 	    </div>
 	</div>
 	<script src="${pageContext.request.contextPath}/lib/wiki/static/js/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/lib/wiki/static/editormd.min.js"></script>
+	
 	<script type="text/javascript">
 	var testEditor;
 	var path;
@@ -85,10 +87,16 @@
             alert('正文不能为空！');
             return;
         }
+        var id = $("#artid").val();
+        if(id) {
+        	urls = path+"/wiki/art/"+id;
+        } else {
+        	urls = path+"/wiki/art";
+        }
         var inData = {"artId":jQuery('#ART_ID').val(), "artTitle":jQuery("#ART_TITLE").val(), "artKeywords":jQuery("#ART_KEYWORDS").val(), "artContent":testEditor.getMarkdown() };
         jQuery.ajax({
             type: "POST",
-            url: path+"/wiki/art",
+            url: urls,
             data: inData,
             async: false,
             error: ajaxErrorHandle,

@@ -73,6 +73,7 @@
 </style>
 </head>
 <body>
+<br>
 <div class="side-catalog" id="catalog">
     <div class="markdown-body editormd-preview-container catalog-scroller" id="custom-toc-container"></div>
     <div style="float:right;"><a href="javascript:showOrHideCatalog();" class="btn" style="text-decoration: none;" id="btnSwitch">隐藏目录</a></div>
@@ -85,45 +86,47 @@
                 <div class="span9 article-block">
                     <div class="row-fluid">
                         <div class="span12 blog-article">
-                        	<h1>${artldata.artTitle}
+                            <h1>${artldata.artTitle}
                                 <small style="font-size: 14px"><a href="${pageContext.request.contextPath}/x/wiki/wkv1/id=${artldata.artId}">只看正文</a></small>
                             </h1>
-                        	<div class="blog-img blog-tag-data">
-                        		<div class="span6">
-                        			<ul class="unstyled inline blog-tags">
-                        				<li>
-                        					<i class="icon-tags"></i>
-                        					<a href="${pageContext.request.contextPath}/x/wiki/wklist/tag/${artldata.artKeywords}">${artldata.artKeywords}</a>
-                        				</li>
-                        			</ul>
-                        			<ul class="unstyled inline blog-tags">
+                            <div class="blog-img blog-tag-data">
+                                <div class="span6">
+                                    <ul class="unstyled inline blog-tags">
+                                        <li>
+                                            <i class="icon-tags"></i>
+                                            <a href="${pageContext.request.contextPath}/wiki/wklist/tag/${artldata.artKeywords}">${artldata.artKeywords}</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="unstyled inline blog-tags">
                                         <li><i class="icon-eye-open"></i> ${artldata.mathchTimes}
                                         </li>
                                     </ul>
                                 </div>
-                            	<div class="span6 blog-tag-data-inner">
-									<ul class="unstyled inline">
-										<li><a href="$realhome/x/wiki/wkedit/id/${artldata.artId}"><i class="icon-edit"></i> 编辑</a></li><i class="icon-user"></i>${artldata.createUser}<BR>
-											<i class="icon-user-md"></i>${artldata.createUser}
-										</li>
-										<li>
-											<i class="icon-calendar"></i>${artldata.createTime}<BR>
-											<i class="icon-calendar"></i> ${artldata.updateTime}
-										</li>
-									</ul>
-                            	</div>
-                            	<input type="hidden" id="ART_CONTENT" name="ART_CONTENT" value="${artldata.artContent}">
-                         	</div>
-                      	</div>
-                  	</div>
-                  	<div id="test-editormd-view">
+                                <div class="span6 blog-tag-data-inner">
+                                    <ul class="unstyled inline">
+                                        
+                                        <li><a href="${pageContext.request.contextPath}/wiki/wkedit/${artldata.artId}"><i class="icon-edit"></i> 编辑</a></li>
+                                        <li><i class="icon-user"></i>${artldata.createUser}<BR>
+                                            <i class="icon-user-md"></i>${artldata.createUser}
+                                        </li>
+                                        <li><i class="icon-calendar"></i> ${artldata.createTime}<BR>
+                                            <i class="icon-calendar"></i> ${artldata.createTime}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <input type="hidden" id="ART_CONTENT" name="ART_CONTENT" value="${artldata.artContent}">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="test-editormd-view">
                        <textarea style="display:none;" name="test-editormd-markdown-doc"></textarea>
-					</div>
-				</div>
+                    </div>
+                </div>
+                <%@ include file="wkside.jsp"%>
             </div>
         </div>
     </div>
-</div>                 					
+</div>              					
 </body>
 </html>
 <script type="text/javascript">

@@ -49,4 +49,31 @@ public class WikiArticlesServiceImpl implements WikiArticlesService{
 		return map;
 	}
 
+	@Override
+	public Map updateArticle(WkArticles wkArticle) {
+		// TODO Auto-generated method stub
+		Map<String,Object>  map = new HashMap<>();
+		int i = wikiArticlesDao.updateArticle(wkArticle);
+		map.put("code", 101);
+		map.put("msg", "失败");
+		if (i >0) {
+		map.put("code", 200);
+		map.put("msg", "成功");
+		}
+		return map;
+	}
+
+	@Override
+	public Map deleteArticle(String id) {
+		Map<String,Object>  map = new HashMap<>();
+		int i = wikiArticlesDao.deleteArticle(id);
+		map.put("code", 101);
+		map.put("msg", "失败");
+		if (i >0) {
+		map.put("code", 200);
+		map.put("msg", "成功");
+		}
+		return map;
+	}
+
 }

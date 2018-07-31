@@ -11,4 +11,8 @@ public interface WikiArticlesService {
 	WkArticles getWkArticle(String artId);
 	
 	Map saveWkArticle(WkArticles wkArticle);
+	
+	Map updateArticle(WkArticles wkArticle);
+	
+	Map deleteArticle(String id);
 }

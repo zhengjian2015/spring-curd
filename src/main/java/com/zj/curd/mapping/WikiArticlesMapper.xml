@@ -62,4 +62,22 @@
   		values (#{artId},#{artTitle},#{artKeywords},#{artContent},#{createUser},#{createTime},#{updateUser},#{updateTime},
   		#{status},#{mathchTimes},#{supportTimes},#{opposeTimes},#{canmodiUsers})
 	</insert>
+	
+	
+	<update id="updateArticle" parameterType="com.zj.curd.entity.WkArticles" >
+		update WK_ARTICLES  
+		<set>
+	      <if test="artTitle != null">ART_TITLE=#{artTitle},</if>
+	      <if test="artKeywords != null">ART_KEYWORDS=#{artKeywords},</if>
+	      <if test="artContent != null">ART_CONTENT=#{artContent},</if>
+	      <if test="artContent != null">ART_CONTENT=#{artContent},</if>
+	      <if test="updateTime != null">UPDATE_TIME=#{updateTime},</if>
+	      <if test="updateUser != null">UPDATE_USER=#{updateUser}</if>
+    	</set>
+    	where ART_ID = #{artId}
+	</update>
+	
+	<delete id="deleteArticle" parameterType="java.lang.String">
+		delete from WK_ARTICLES where ART_ID = #{artId}
+	</delete>
 </mapper>
