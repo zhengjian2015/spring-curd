@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,9 +37,7 @@ public class WiKiContriller {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		List<WkArticlesauthor> wikiArticlesList = wikiArticlesService.ListArticles(0);
-		
 		modelAndView.addObject("wikiArticlesList",wikiArticlesList);
-		
 		modelAndView.setViewName("/wiki/wklist");
 		return modelAndView;
 		
@@ -48,12 +47,17 @@ public class WiKiContriller {
 	public ModelAndView getArticles(@PathVariable(value="id") String id) {
 		
 		ModelAndView modelAndView = new ModelAndView();
-		String keywords = "Java";
-		modelAndView.addObject("keywords",keywords);
-		WkArticles artldata = wikiArticlesService.getWkArticle(id);
+		WkArticlesauthor artldata = wikiArticlesService.getWkArticle(id);
 		modelAndView.addObject("artldata",artldata);
 		modelAndView.setViewName("/wiki/wkv2");
 		return modelAndView;
+	}
+	
+	@RequestMapping(value="/wkv1/{id}")
+	public String getArticleonly(@PathVariable(value="id") String id,Model model) {
+		model.addAttribute("artldata", id);
+		return "wiki/wkv1";
+		
 	}
 	
 	@RequestMapping("/wkedit")
@@ -96,6 +100,13 @@ public class WiKiContriller {
 		map = wikiArticlesService.updateArticle(article);
 		System.out.println(map);
 		return map;
+	}
+	
+	@RequestMapping(value="/art/{id}",method=RequestMethod.GET)
+	@ResponseBody
+	public WkArticlesauthor selectArticle(@PathVariable(value="id") String artId) {
+		WkArticlesauthor artldata = wikiArticlesService.getWkArticle(artId);
+		return artldata;
 	}
 	
 	@RequestMapping(value="/art/{id}",method=RequestMethod.DELETE)

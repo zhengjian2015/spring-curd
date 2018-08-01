@@ -87,7 +87,7 @@
                     <div class="row-fluid">
                         <div class="span12 blog-article">
                             <h1>${artldata.artTitle}
-                                <small style="font-size: 14px"><a href="${pageContext.request.contextPath}/x/wiki/wkv1/id=${artldata.artId}">只看正文</a></small>
+                                <small style="font-size: 14px"><a href="${pageContext.request.contextPath}/wiki/wkv1/${artldata.artId}">只看正文</a></small>
                             </h1>
                             <div class="blog-img blog-tag-data">
                                 <div class="span6">
