@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.zj.curd.entity.WkArticles;
+import com.zj.curd.entity.WkArticlesauthor;
 import com.zj.curd.pojo.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)     //表示继承了SpringJUnit4ClassRunner类  
@@ -25,9 +26,21 @@ public class ListWikiArticles {
 	
 	@Test
     public void wikiArticles() {
-		List<WkArticles> listWikiArticles = wikiArticlesService.ListArticles(0);
+		String artId = "db8282c61e5745c1b94592e0a8cf7166";
+		WkArticlesauthor wkArticlesauthor= wikiArticlesService.getWkArticle(artId);
 		logger.debug("*************************000");
-		logger.debug(listWikiArticles);
+		logger.debug(wkArticlesauthor);
+		logger.debug(wkArticlesauthor.getCreatefullName());
+		
+	}
+	
+	@Test
+    public void listWikiArticles() {
+		List<WkArticlesauthor> wkArticlesauthors= wikiArticlesService.ListArticles(0);
+		logger.debug("*************************000");
+		for(WkArticlesauthor wk : wkArticlesauthors) {
+			logger.debug(wk.getCreatefullName());
+		}
 		
 	}
 	

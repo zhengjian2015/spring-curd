@@ -106,8 +106,8 @@
                                     <ul class="unstyled inline">
                                         
                                         <li><a href="${pageContext.request.contextPath}/wiki/wkedit/${artldata.artId}"><i class="icon-edit"></i> 编辑</a></li>
-                                        <li><i class="icon-user"></i>${artldata.createUser}<BR>
-                                            <i class="icon-user-md"></i>${artldata.createUser}
+                                        <li><i class="icon-user"></i>${artldata.createfullName}<BR>
+                                            <i class="icon-user-md"></i>${artldata.updatefullName}
                                         </li>
                                         <li><i class="icon-calendar"></i> ${artldata.createTime}<BR>
                                             <i class="icon-calendar"></i> ${artldata.createTime}

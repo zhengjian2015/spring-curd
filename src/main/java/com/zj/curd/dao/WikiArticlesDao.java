@@ -5,11 +5,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.zj.curd.entity.WkArticles;
+import com.zj.curd.entity.WkArticlesauthor;
 
 public interface WikiArticlesDao {
-	List<WkArticles> ListArticles(@Param(value="status") Integer status);
+	List<WkArticlesauthor> ListArticles(@Param(value="status") Integer status);
 	
-	WkArticles getArticleById(@Param(value="artId") String artId);
+	WkArticlesauthor getArticleById(@Param(value="artId") String artId);
 	
 	int saveArticle(WkArticles WkArticle);
 	

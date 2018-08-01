@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zj.curd.entity.WkArticles;
+import com.zj.curd.entity.WkArticlesauthor;
 import com.zj.curd.pojo.User;
 import com.zj.curd.service.WikiArticlesService;
 
@@ -34,7 +35,7 @@ public class WiKiContriller {
 	public ModelAndView ListArticles() {
 		
 		ModelAndView modelAndView = new ModelAndView();
-		List<WkArticles> wikiArticlesList = wikiArticlesService.ListArticles(0);
+		List<WkArticlesauthor> wikiArticlesList = wikiArticlesService.ListArticles(0);
 		
 		modelAndView.addObject("wikiArticlesList",wikiArticlesList);
 		

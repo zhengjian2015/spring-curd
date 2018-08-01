@@ -66,7 +66,7 @@ function delAction(id) {
 									<li><a href="#" class="tooltips" data-original-title="aaa"><i class="icon-group"></i> 权限</a></li>
 									<li><a href="javascript:delAction('${a.artId}')"><i class="icon-trash"></i> 删除</a></li>
 									<li><a href="${pageContext.request.contextPath}/wiki/wkedit/${a.artId}"><i class="icon-edit"></i> 编辑</a></li>
-									<li><i class="icon-user"></i>${a.updateUser}</li>
+									<li><i class="icon-user"></i>${a.updatefullName}</li>
                                     <li><i class="icon-calendar"></i>${a.updateTime}</li>
 								</ul>
 							</div>

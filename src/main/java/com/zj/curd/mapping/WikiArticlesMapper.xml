@@ -19,6 +19,25 @@
     </sql>
     
     
+    <resultMap id="ArticleResultAu" type="com.zj.curd.entity.WkArticlesauthor">
+        <id property="artId" column="ART_ID"/>
+        <result property="artTitle" column="ART_TITLE"/>
+        <result property="artKeywords" column="ART_KEYWORDS"/>
+        <result property="artContent" column="ART_CONTENT"/>
+        <result property="createUser" column="CREATE_USER"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateUser" column="UPDATE_USER"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <result property="status" column="STATUS"/>
+        <result property="mathchTimes" column="MATCH_TIMES"/>
+        <result property="supportTimes" column="SUPPORT_TIMES"/>
+        <result property="opposeTimes" column="OPPOSE_TIMES"/>
+        <result property="canmodiUsers" column="CANMODI_USERS"/>
+        <result property="canmodiUsers" column="CANMODI_USERS"/>
+        <result property="updatefullName" column="UFULL_NAME"/>
+		<result property="createfullName" column="CFULL_NAME"/>
+    </resultMap>
+    
     <resultMap id="ArticleResult" type="com.zj.curd.entity.WkArticles">
         <id property="artId" column="ART_ID"/>
         <result property="artTitle" column="ART_TITLE"/>
@@ -33,27 +52,32 @@
         <result property="supportTimes" column="SUPPORT_TIMES"/>
         <result property="opposeTimes" column="OPPOSE_TIMES"/>
         <result property="canmodiUsers" column="CANMODI_USERS"/>
+        <result property="canmodiUsers" column="CANMODI_USERS"/>
+
     </resultMap>
 
 	<!--获得所有文章-->
-    <select id="ListArticles" resultMap="ArticleResult" parameterType="java.lang.Integer">
+    <select id="ListArticles" resultMap="ArticleResultAu" parameterType="java.lang.Integer">
         SELECT
-        <include refid="article_table_all_columns"/>
+        <include refid="article_table_all_columns"/>,c.FULL_NAME as UFULL_NAME,a.FULL_NAME as  CFULL_NAME
         FROM
-        WK_ARTICLES
+        WK_ARTICLES w LEFT JOIN ORG_USER c on w.CREATE_USER = c.USER_CODE
+        LEFT JOIN ORG_USER a on w.CREATE_USER = a.USER_CODE
         <where>
             <if test="status!=null">
-                STATUS=#{status}
+                w.STATUS=#{status}
             </if>
         </where>
-        ORDER BY UPDATE_TIME DESC
+        ORDER BY w.UPDATE_TIME DESC
     </select>
     
     <!--查看文章-->
-    <select id="getArticleById" parameterType="java.lang.String" resultMap="ArticleResult">
-		SELECT <include refid="article_table_all_columns"/>
+    <select id="getArticleById" parameterType="java.lang.String" resultMap="ArticleResultAu">
+		SELECT <include refid="article_table_all_columns"/>,o.FULL_NAME as UFULL_NAME,c.FULL_NAME as CFULL_NAME
 		FROM
-        WK_ARTICLES  WHERE ART_ID=#{artId}
+        WK_ARTICLES w LEFT JOIN ORG_USER o on w.CREATE_USER = o.USER_CODE 
+        LEFT JOIN ORG_USER c on w.CREATE_USER = c.USER_CODE 
+         WHERE w.ART_ID=#{artId}
 	</select>
 	
 	<insert id="saveArticle" parameterType="com.zj.curd.entity.WkArticles" >
@@ -76,6 +100,7 @@
     	</set>
     	where ART_ID = #{artId}
 	</update>
+	
 	
 	<delete id="deleteArticle" parameterType="java.lang.String">
 		delete from WK_ARTICLES where ART_ID = #{artId}

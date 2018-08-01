@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.zj.curd.entity.WkArticles;
+import com.zj.curd.entity.WkArticlesauthor;
 
 public interface WikiArticlesService {
-	List<WkArticles> ListArticles(Integer status);
+	List<WkArticlesauthor> ListArticles(Integer status);
 	
-	WkArticles getWkArticle(String artId);
+	WkArticlesauthor getWkArticle(String artId);
 	
 	Map saveWkArticle(WkArticles wkArticle);
 	
