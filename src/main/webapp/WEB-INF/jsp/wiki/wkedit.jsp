@@ -63,7 +63,7 @@
             //dialogMaskBgColor : "#000", // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
             imageUpload : true,
             imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL : "./rst/img",
+            imageUploadURL : "<%=request.getContextPath()%>/wiki/uploadfile",
             atLink    : false,    // disable @link
             emailLink : false     // disable email address auto link
         });

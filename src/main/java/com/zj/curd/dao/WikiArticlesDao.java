@@ -17,4 +17,5 @@ public interface WikiArticlesDao {
 	int updateArticle(WkArticles WkArticle);
 	
 	int deleteArticle(@Param(value="artId") String artId);
+	
 }

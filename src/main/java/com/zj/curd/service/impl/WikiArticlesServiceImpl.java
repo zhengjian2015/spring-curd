@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.zj.curd.dao.WikiArticlesDao;
 import com.zj.curd.entity.WkArticles;
@@ -76,5 +77,13 @@ public class WikiArticlesServiceImpl implements WikiArticlesService{
 		}
 		return map;
 	}
+
+	@Override
+	public Integer saveImage(MultipartFile file) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }

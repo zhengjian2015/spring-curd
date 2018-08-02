@@ -2,6 +2,7 @@ package com.zj.curd.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zj.curd.entity.WkArticles;
@@ -98,7 +101,6 @@ public class WiKiContriller {
 		article.setStatus(0);
 		Map<String,Object> map = new HashMap<String, Object>();
 		map = wikiArticlesService.updateArticle(article);
-		System.out.println(map);
 		return map;
 	}
 	
@@ -114,7 +116,6 @@ public class WiKiContriller {
 	public Map deleteArticle(@PathVariable(value="id") String artId) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map = wikiArticlesService.deleteArticle(artId);
-		System.out.println(map);
 		return map;
 	}
 	
@@ -128,4 +129,15 @@ public class WiKiContriller {
 		modelAndView.setViewName("/wiki/wkedit");
 		return modelAndView;
 	}
+	
+
+	 @RequestMapping(value="/uploadfile",method=RequestMethod.POST)
+	  public String getImage(HttpServletRequest request,HttpServletResponse response,@RequestParam(value = "editormd_image_file", required = true) MultipartFile file){
+		 
+		 String fileName = file.getOriginalFilename();  
+		 wikiArticlesService.saveImage(file);
+		return fileName;
+	 }
+
+	
 }
