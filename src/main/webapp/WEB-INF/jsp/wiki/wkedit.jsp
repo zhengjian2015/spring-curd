@@ -39,7 +39,7 @@
         testEditor = editormd("test-editormd", {
             width: "100%",
             height: 710,
-            path : 'static/lib/',
+            path : '${pageContext.request.contextPath}/lib/wiki/static/lib/',
             markdown : markdoc,
             codeFold : true,
             //syncScrolling : false,

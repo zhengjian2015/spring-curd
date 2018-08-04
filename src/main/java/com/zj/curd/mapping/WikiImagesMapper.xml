@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zj.curd.dao.WikiImagesDao" >
+	
+	<sql id="img_table_all_columns">
+        IMG_ID,
+        FILENAME,
+        FILESIZE,
+        CREATE_USER,
+        CREATE_TIME,
+        FILEDATA
+    </sql>
+	
+	<resultMap id="ImageResult" type="com.zj.curd.entity.WkImages">
+        <id property="imgId" column="IMG_ID"/>
+        <result property="fileName" column="FILENAME"/>
+        <result property="fileSize" column="FILESIZE"/>
+        <result property="createUser" column="CREATE_USER"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="fileData" column="FILEDATA"/>
+
+    </resultMap>
+	
+	<insert id="saveImages" parameterType="com.zj.curd.entity.WkImages" >
+			insert into WK_IMAGES (IMG_ID,FILENAME,FILESIZE,CREATE_USER,CREATE_TIME,
+			FILEDATA)
+	  		values (#{imgId},#{fileName},#{fileSize},#{createUser},#{createTime},#{fileData})
+	</insert>
+	
+	<select id="getImageById" parameterType="java.lang.String" resultMap="ImageResult">
+        SELECT <include refid="img_table_all_columns"/>
+        FROM
+        WK_IMAGES  WHERE IMG_ID=#{imgId}
+    </select>
+	
+</mapper>

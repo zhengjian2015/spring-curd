@@ -35,7 +35,7 @@
         <result property="canmodiUsers" column="CANMODI_USERS"/>
         <result property="canmodiUsers" column="CANMODI_USERS"/>
         <result property="updatefullName" column="UFULL_NAME"/>
-		<result property="createfullName" column="CFULL_NAME"/>
+        <result property="createfullName" column="CFULL_NAME"/>
     </resultMap>
     
     <resultMap id="ArticleResult" type="com.zj.curd.entity.WkArticles">
@@ -56,7 +56,7 @@
 
     </resultMap>
 
-	<!--获得所有文章-->
+    <!--获得所有文章-->
     <select id="ListArticles" resultMap="ArticleResultAu" parameterType="java.lang.Integer">
         SELECT
         <include refid="article_table_all_columns"/>,c.FULL_NAME as UFULL_NAME,a.FULL_NAME as  CFULL_NAME
@@ -73,36 +73,36 @@
     
     <!--查看文章-->
     <select id="getArticleById" parameterType="java.lang.String" resultMap="ArticleResultAu">
-		SELECT <include refid="article_table_all_columns"/>,o.FULL_NAME as UFULL_NAME,c.FULL_NAME as CFULL_NAME
-		FROM
+        SELECT <include refid="article_table_all_columns"/>,o.FULL_NAME as UFULL_NAME,c.FULL_NAME as CFULL_NAME
+        FROM
         WK_ARTICLES w LEFT JOIN ORG_USER o on w.CREATE_USER = o.USER_CODE 
         LEFT JOIN ORG_USER c on w.CREATE_USER = c.USER_CODE 
          WHERE w.ART_ID=#{artId}
-	</select>
-	
-	<insert id="saveArticle" parameterType="com.zj.curd.entity.WkArticles" >
-		insert into WK_ARTICLES (ART_ID,ART_TITLE,ART_KEYWORDS,ART_CONTENT,CREATE_USER,
-		CREATE_TIME,UPDATE_USER,UPDATE_TIME,STATUS,MATCH_TIMES,SUPPORT_TIMES,OPPOSE_TIMES,CANMODI_USERS)
-  		values (#{artId},#{artTitle},#{artKeywords},#{artContent},#{createUser},#{createTime},#{updateUser},#{updateTime},
-  		#{status},#{mathchTimes},#{supportTimes},#{opposeTimes},#{canmodiUsers})
-	</insert>
-	
-	
-	<update id="updateArticle" parameterType="com.zj.curd.entity.WkArticles" >
-		update WK_ARTICLES  
-		<set>
-	      <if test="artTitle != null">ART_TITLE=#{artTitle},</if>
-	      <if test="artKeywords != null">ART_KEYWORDS=#{artKeywords},</if>
-	      <if test="artContent != null">ART_CONTENT=#{artContent},</if>
-	      <if test="artContent != null">ART_CONTENT=#{artContent},</if>
-	      <if test="updateTime != null">UPDATE_TIME=#{updateTime},</if>
-	      <if test="updateUser != null">UPDATE_USER=#{updateUser}</if>
-    	</set>
-    	where ART_ID = #{artId}
-	</update>
-	
-	
-	<delete id="deleteArticle" parameterType="java.lang.String">
-		delete from WK_ARTICLES where ART_ID = #{artId}
-	</delete>
+    </select>
+    
+    <insert id="saveArticle" parameterType="com.zj.curd.entity.WkArticles" >
+        insert into WK_ARTICLES (ART_ID,ART_TITLE,ART_KEYWORDS,ART_CONTENT,CREATE_USER,
+        CREATE_TIME,UPDATE_USER,UPDATE_TIME,STATUS,MATCH_TIMES,SUPPORT_TIMES,OPPOSE_TIMES,CANMODI_USERS)
+        values (#{artId},#{artTitle},#{artKeywords},#{artContent},#{createUser},#{createTime},#{updateUser},#{updateTime},
+        #{status},#{mathchTimes},#{supportTimes},#{opposeTimes},#{canmodiUsers})
+    </insert>
+    
+    
+    <update id="updateArticle" parameterType="com.zj.curd.entity.WkArticles" >
+        update WK_ARTICLES  
+        <set>
+          <if test="artTitle != null">ART_TITLE=#{artTitle},</if>
+          <if test="artKeywords != null">ART_KEYWORDS=#{artKeywords},</if>
+          <if test="artContent != null">ART_CONTENT=#{artContent},</if>
+          <if test="artContent != null">ART_CONTENT=#{artContent},</if>
+          <if test="updateTime != null">UPDATE_TIME=#{updateTime},</if>
+          <if test="updateUser != null">UPDATE_USER=#{updateUser}</if>
+        </set>
+        where ART_ID = #{artId}
+    </update>
+    
+    
+    <delete id="deleteArticle" parameterType="java.lang.String">
+        delete from WK_ARTICLES where ART_ID = #{artId}
+    </delete>
 </mapper>

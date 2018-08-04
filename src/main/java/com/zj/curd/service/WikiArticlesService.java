@@ -19,5 +19,5 @@ public interface WikiArticlesService {
 	
 	Map deleteArticle(String id);
 	
-	Integer saveImage(MultipartFile file);
+
 }

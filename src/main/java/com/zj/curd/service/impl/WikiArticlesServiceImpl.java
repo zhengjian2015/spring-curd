@@ -78,11 +78,7 @@ public class WikiArticlesServiceImpl implements WikiArticlesService{
 		return map;
 	}
 
-	@Override
-	public Integer saveImage(MultipartFile file) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	
 

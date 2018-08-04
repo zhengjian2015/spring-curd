@@ -89,6 +89,7 @@
                             <h1>${artldata.artTitle}
                                 <small style="font-size: 14px"><a href="${pageContext.request.contextPath}/wiki/wkv1/${artldata.artId}">只看正文</a></small>
                             </h1>
+                            <input type="hidden" value="${artldata.artId}" id="arid"/>
                             <div class="blog-img blog-tag-data">
                                 <div class="span6">
                                     <ul class="unstyled inline blog-tags">
@@ -114,7 +115,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <input type="hidden" id="ART_CONTENT" name="ART_CONTENT" value="${artldata.artContent}">
+                                <!-- 发现用input框放文章内容，格式就没了 所以改用li -->
+                                <li style="display:none""  id="ART_CONTENT" name="ART_CONTENT" >${artldata.artContent}</li>
                             </div>
                         </div>
                     </div>
@@ -126,15 +128,16 @@
             </div>
         </div>
     </div>
-</div>              					
+</div>                                  
 </body>
 </html>
 <script type="text/javascript">
 var testEditormdView;
 
 $(function(){
+	console.log(jQuery('#ART_CONTENT').html());
 	testEditormdView = editormd.markdownToHTML("test-editormd-view", {
-        markdown        : jQuery('#ART_CONTENT').val(),
+        markdown        : jQuery('#ART_CONTENT').html(),
         htmlDecode      : "style,script,iframe",  // you can filter tags decode
         toc             : true,
         emoji           : true,
@@ -148,4 +151,14 @@ $(function(){
         tocDropdown   : false
     });
 })
+
+function showOrHideCatalog() {
+        if (jQuery('#catalog').css("height")=='456px') {
+            jQuery('#catalog').css("height",'0px');
+            jQuery('#btnSwitch').text('显示目录')
+        } else {
+            jQuery('#catalog').css("height",'456px')
+            jQuery('#btnSwitch').text('隐藏目录')
+        }
+    }
 </script>

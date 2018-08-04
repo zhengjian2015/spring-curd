@@ -12,6 +12,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,14 +28,20 @@ import com.zj.curd.entity.WkArticles;
 import com.zj.curd.entity.WkArticlesauthor;
 import com.zj.curd.pojo.User;
 import com.zj.curd.service.WikiArticlesService;
+import com.zj.curd.service.WikiImageService;
+import com.zj.curd.testmybatis.TestMyBatis;
 
 
 @Controller
 @RequestMapping("/wiki")
 public class WiKiContriller {
-	
+	private static Logger logger = Logger.getLogger(WiKiContriller.class); 
 	@Resource
 	private WikiArticlesService wikiArticlesService;
+	
+	@Resource
+	private WikiImageService wikiImageService;
+	
 	
 	@RequestMapping("/wklist")
 	public ModelAndView ListArticles() {
@@ -130,14 +138,33 @@ public class WiKiContriller {
 		return modelAndView;
 	}
 	
-
+     //上传图片
 	 @RequestMapping(value="/uploadfile",method=RequestMethod.POST)
-	  public String getImage(HttpServletRequest request,HttpServletResponse response,@RequestParam(value = "editormd_image_file", required = true) MultipartFile file){
-		 
-		 String fileName = file.getOriginalFilename();  
-		 wikiArticlesService.saveImage(file);
-		return fileName;
-	 }
-
+	 @ResponseBody
+	 public Map<String,Object> getImage(HttpServletRequest request,HttpServletResponse response,@RequestParam(value = "editormd_image_file", required = true) MultipartFile file){
 	
+		 String path = request.getContextPath();
+		 Map<String,Object> result = new HashMap<String,Object>();
+		 result.put("success", 1);
+		 result.put("message", "上传成功");
+		 result.put("url", "图片地址");
+		 String imagId = wikiImageService.saveImage(file,request);
+		 String path1 = path+"/wiki/img?id="+imagId;
+		 result.put("url", path1);
+		 if (imagId == "0") {
+			 result.put("success", 0);
+			 result.put("message", "上传图标数据为空！");
+		 }
+		 return result;
+	 }
+	 
+	 @RequestMapping(value="/img",method=RequestMethod.GET)
+	 @ResponseBody
+	 public byte[] getImage(HttpServletRequest request) {
+		 String ids = request.getParameter("id");
+		 String imgData = wikiImageService.getImageData(ids);
+		 //imgData是base64,需要解码为byte
+		 return Base64.decodeBase64(imgData);
+		 
+	 }
 }
