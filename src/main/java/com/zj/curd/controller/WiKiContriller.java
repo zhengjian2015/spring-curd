@@ -63,8 +63,11 @@ public class WiKiContriller {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		WkArticlesauthor artldata = wikiArticlesService.getWkArticle(id);
+		List<WkArticles> wkArticlesHot = wikiArticlesService.listrelaWkArticles(artldata);
 		//¸üÐÂwatchtime
 		wikiArticlesService.updateMathchTime(id);
+		List<WkArticles> wkArticlesRelist = wikiArticlesService.listrelaWkArticles(artldata);
+		modelAndView.addObject("listArt",wkArticlesRelist);
 		modelAndView.addObject("artldata",artldata);
 		modelAndView.setViewName("/wiki/wkv2");
 		return modelAndView;

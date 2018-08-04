@@ -48,7 +48,6 @@ public class WikiArticlesServiceImpl implements WikiArticlesService{
 		// TODO Auto-generated method stub
 		
 		WkArticlesauthor wkArticles = wikiArticlesDao.getArticleById(artId);
-		
 		return wkArticles;
 	}
 	
@@ -106,6 +105,21 @@ public class WikiArticlesServiceImpl implements WikiArticlesService{
 	public List<WkArticles> hotWkArticles(Integer status) {
 		// TODO Auto-generated method stub
 		return wikiArticlesDao.hotWkArticles(status);
+	}
+
+	//相关文章
+	@Override
+	public List<WkArticles> listrelaWkArticles(WkArticles wkArticle) {
+		
+		String Keywords = wkArticle.getArtKeywords();
+		List<String> KeywordsList = null;
+		String artId = wkArticle.getArtId();
+		if (Keywords != null) {
+			String[] Keywordsed = Keywords.split("\\s+");//这样写就可以了 多个空格
+			KeywordsList = Arrays.asList(Keywordsed);
+		}
+		List<WkArticles> wkArticles = wikiArticlesDao.listrelaWkArticles(0, KeywordsList, artId);
+		return wkArticles;
 	}
 
 

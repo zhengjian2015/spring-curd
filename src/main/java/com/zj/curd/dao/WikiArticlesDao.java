@@ -22,4 +22,6 @@ public interface WikiArticlesDao {
 	
 	List<WkArticles> hotWkArticles(@Param(value="status") Integer status);
 	
+	List<WkArticles> listrelaWkArticles(@Param(value="status") Integer status,@Param(value="KeywordsList") List<String> KeywordsList,@Param(value="artId") String artId);
+	
 }

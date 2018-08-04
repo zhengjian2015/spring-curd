@@ -54,6 +54,18 @@ public class ListWikiArticles {
 	}
 	
 	@Test
+    public void wikiArticles3() {
+		List KeywordsList = new ArrayList<>();
+		KeywordsList.add("Web");
+		KeywordsList.add("aa");
+		String artId="1aa";
+		List<WkArticles> wkArticlesauthor= wikiArticlesDao.listrelaWkArticles(0, KeywordsList, artId);
+		logger.debug("*************************000");
+		logger.debug(wkArticlesauthor);
+		
+	}
+	
+	@Test
 	public void testImage() {
 		String imgId = "7c222453a30c4b65710b2796ba59d66b";
 		WkImages wkImagea = wikiImagesDao.getImageById(imgId);

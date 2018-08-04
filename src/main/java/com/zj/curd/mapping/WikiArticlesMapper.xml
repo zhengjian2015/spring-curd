@@ -124,4 +124,27 @@
     <select id="hotWkArticles" parameterType="java.lang.Integer" resultMap="ArticleResult">
         SELECT * FROM  WK_ARTICLES WHERE STATUS=#{status} ORDER BY MATCH_TIMES DESC LIMIT 0,5 	
     </select>
+    
+    
+    <!--相关文章-->
+    <select id="listrelaWkArticles" resultMap="ArticleResult" >
+        SELECT * FROM
+        WK_ARTICLES 
+        <where>
+            <if test="status!=null">
+                AND STATUS=#{status}
+            </if>
+            <if test="artId!=null">
+                AND ART_ID != #{artId}
+            </if>
+            <if test ="KeywordsList!=null">
+	            <foreach collection="KeywordsList" item="str_qry" separator="OR" open="AND">
+		            <if test ="str_qry !=null and str_qry !='' ">
+		   				ART_KEYWORDS like '%${str_qry}%' 
+					</if>
+				</foreach>
+			</if>
+        </where>
+         ORDER BY MATCH_TIMES  DESC LIMIT 0,10
+    </select>
 </mapper>
