@@ -80,7 +80,6 @@ function delAction(id) {
 			</div>
 			<!--end span9-->
 			<%@ include file="wkside.jsp"%>
-			
 		</div>
 		<div class="pagination">
             <!--分页文字信息  -->

@@ -20,4 +20,6 @@ public interface WikiArticlesDao {
 	
 	int updateMathchTime(@Param(value="artId") String artId);
 	
+	List<WkArticles> hotWkArticles(@Param(value="status") Integer status);
+	
 }

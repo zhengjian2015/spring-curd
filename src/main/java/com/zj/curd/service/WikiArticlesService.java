@@ -24,5 +24,5 @@ public interface WikiArticlesService {
 	
 	int updateMathchTime(String artId);
 	
-
+	List<WkArticles> hotWkArticles(Integer status);
 }

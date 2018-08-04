@@ -101,6 +101,13 @@ public class WikiArticlesServiceImpl implements WikiArticlesService{
 		return a;
 	}
 
+	//ххцендуб
+	@Override
+	public List<WkArticles> hotWkArticles(Integer status) {
+		// TODO Auto-generated method stub
+		return wikiArticlesDao.hotWkArticles(status);
+	}
+
 
 
 	

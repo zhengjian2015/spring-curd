@@ -21,4 +21,12 @@
             </button>
         </form>
     </div>
+    <h3>热门文章</h3>
+       <c:forEach items="${hotart}" var="h">
+         <div class="blog-twitter-block">
+               <a href="${pageContext.request.contextPath}/wiki/wkv2/${h.artId}">${h.artTitle}</a>
+               <span>${h.updateTime}</span>
+               <i class="icon-file blog-twiiter-icon"></i>
+         </div>
+       </c:forEach>
 </div>
