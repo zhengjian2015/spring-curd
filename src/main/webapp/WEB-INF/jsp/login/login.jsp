@@ -140,13 +140,11 @@ $(function() {
                 contentType: "application/x-www-form-urlencoded; charset=utf-8",
                 data: $("#loginForm").serialize(),
                 dataType: "json",
-                success: function (data) {
-                	console.log(data);
-                	console.log(typeof data);
+                success: function (data) {	
                     if(data.code==0) {
                         alert(data.msg);
                     } else {
-                        window.location.href="${pageContext.request.contextPath}/indexs";
+                        window.location.href="${pageContext.request.contextPath}/wiki/wklist";
                     }
                 },
                 error: function () {

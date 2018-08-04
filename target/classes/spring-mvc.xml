@@ -77,7 +77,6 @@
     </bean>  
     <!-- 处理静态资源 -->
 	<mvc:resources location="/lib/" mapping="/lib/**"></mvc:resources>
-	<mvc:resources location="/wiki/" mapping="/wiki/**"></mvc:resources>
 	
 	 <mvc:interceptors>
        

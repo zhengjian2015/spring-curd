@@ -43,7 +43,7 @@ function delAction(id) {
 	<div class="row-fluid">
 		<div class="span12 blog-page">
 			<div class="span9 article-block">
-			<c:forEach items="${wikiArticlesList}" var="a">
+			<c:forEach items="${pageInfo.list}" var="a">
 				<div class="row-fluid">
 					<div class="span12 blog-article">
 						<h2><a href="${pageContext.request.contextPath}/wiki/wkv2/${a.artId}">${a.artTitle}</a></h2>
@@ -83,11 +83,40 @@ function delAction(id) {
 			
 		</div>
 		<div class="pagination">
-	        <ul>
-	            <li class="active"><a href="#">上一页</a></li>
-	            <li class="active"><a href="#">下一页</a></li>
-	        </ul>
-       	</div>
+            <!--分页文字信息  -->
+            <div class="col-md-6 pageMessage" id="page_info_area">当前 ${pageInfo.pageNum }页,总${pageInfo.pages }
+                页,总 ${pageInfo.total } 条记录</div>
+            <!-- 分页条信息 -->
+            <div class="col-md-6" id="page_nav_area">
+                <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li><a href="${pageContext.request.contextPath}/wiki/wklist?pn=1">首页</a></li>
+                    <c:if test="${pageInfo.hasPreviousPage }">
+                        <li><a href="${pageContext.request.contextPath}/wiki/wklist?pn=${pageInfo.pageNum-1}"
+                            aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+                        </a></li>
+                    </c:if>
+
+
+                    <c:forEach items="${pageInfo.navigatepageNums }" var="page_Num">
+                        <c:if test="${page_Num == pageInfo.pageNum }">
+                            <li class="active"><a href="#">${page_Num }</a></li>
+                        </c:if>
+                        <c:if test="${page_Num != pageInfo.pageNum }">
+                            <li><a href="${pageContext.request.contextPath}/wiki/wklist?pn=${page_Num }">${page_Num }</a></li>
+                        </c:if>
+
+                    </c:forEach>
+                    <c:if test="${pageInfo.hasNextPage }">
+                        <li><a href="${pageContext.request.contextPath}/wiki/wklist?pn=${pageInfo.pageNum+1 }"
+                            aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+                        </a></li>
+                    </c:if>
+                    <li><a href="${pageContext.request.contextPath}/wiki/wklist?pn=${pageInfo.pages}">末页</a></li>
+                </ul>
+                </nav>
+            </div>
+        </div>
 	</div>
 </div>
 </body>

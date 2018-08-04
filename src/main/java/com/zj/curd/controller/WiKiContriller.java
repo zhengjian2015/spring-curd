@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.pagehelper.PageInfo;
 import com.zj.curd.entity.WkArticles;
 import com.zj.curd.entity.WkArticlesauthor;
 import com.zj.curd.pojo.User;
@@ -44,11 +45,12 @@ public class WiKiContriller {
 	
 	
 	@RequestMapping("/wklist")
-	public ModelAndView ListArticles() {
+	public ModelAndView ListArticles(@RequestParam(value = "pn", defaultValue = "1") Integer pn,HttpServletRequest request) {
 		
 		ModelAndView modelAndView = new ModelAndView();
-		List<WkArticlesauthor> wikiArticlesList = wikiArticlesService.ListArticles(0);
-		modelAndView.addObject("wikiArticlesList",wikiArticlesList);
+		PageInfo<WkArticlesauthor> page = wikiArticlesService.ListArticles(request,pn,0);
+		logger.debug("page "+page);
+		modelAndView.addObject("pageInfo",page);
 		modelAndView.setViewName("/wiki/wklist");
 		return modelAndView;
 		
@@ -59,6 +61,8 @@ public class WiKiContriller {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		WkArticlesauthor artldata = wikiArticlesService.getWkArticle(id);
+		//¸üÐÂwatchtime
+		wikiArticlesService.updateMathchTime(id);
 		modelAndView.addObject("artldata",artldata);
 		modelAndView.setViewName("/wiki/wkv2");
 		return modelAndView;

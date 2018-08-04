@@ -13,7 +13,8 @@
     <h3>搜索</h3>
     <div class="">
         <form action="${pageContext.request.contextPath}/wiki/wklist" method="GET">
-            <input class="m-wrap" type="text" style="box-sizing:content-box;height: 23px" id="qry" name="qry" value="">
+        	<!-- autocomplete="off"禁止历史纪录 -->
+            <input class="m-wrap" type="text" style="box-sizing:content-box;height: 23px" id="qry" name="qry" value="" autocomplete="off">
             <input type="hidden" id="tag" name="tag" value="$param.get('tag','')">
             <button type="submit" class="btn" style="height: 30px;padding-bottom: 5px;padding-left: 12px;padding-right: 12px;padding-top: 5px;">
                 <i class="icon-search"></i>

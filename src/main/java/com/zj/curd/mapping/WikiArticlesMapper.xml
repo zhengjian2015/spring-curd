@@ -59,24 +59,33 @@
     <!--获得所有文章-->
     <select id="ListArticles" resultMap="ArticleResultAu" parameterType="java.lang.Integer">
         SELECT
-        <include refid="article_table_all_columns"/>,c.FULL_NAME as UFULL_NAME,a.FULL_NAME as  CFULL_NAME
+        <include refid="article_table_all_columns"/>,c.USER_NICKNAME as UFULL_NAME,a.USER_NICKNAME as  CFULL_NAME
         FROM
-        WK_ARTICLES w LEFT JOIN ORG_USER c on w.CREATE_USER = c.USER_CODE
-        LEFT JOIN ORG_USER a on w.CREATE_USER = a.USER_CODE
+        WK_ARTICLES w LEFT JOIN USER c on w.CREATE_USER = c.USER_CODE
+        LEFT JOIN USER a on w.CREATE_USER = a.USER_CODE
+        <!-- where标签相当于where关键字，可以自动去除第一个and -->
         <where>
             <if test="status!=null">
-                w.STATUS=#{status}
+                AND w.STATUS=#{status}
             </if>
+            <if test ="list_qry!=null">
+	            <foreach collection="list_qry" item="str_qry">
+		            <if test ="str_qry !=null and str_qry !='' ">
+		   				AND (w.ART_TITLE  like '%${str_qry}%' OR w.ART_KEYWORDS like '%${str_qry}%' OR c.USER_NICKNAME like '%${str_qry}%'
+		   				OR a.USER_NICKNAME like '%${str_qry}%')
+					</if>
+				</foreach>
+			</if>
         </where>
-        ORDER BY w.UPDATE_TIME DESC
+         ORDER BY w.UPDATE_TIME DESC
     </select>
     
     <!--查看文章-->
     <select id="getArticleById" parameterType="java.lang.String" resultMap="ArticleResultAu">
-        SELECT <include refid="article_table_all_columns"/>,o.FULL_NAME as UFULL_NAME,c.FULL_NAME as CFULL_NAME
+        SELECT <include refid="article_table_all_columns"/>,o.USER_NICKNAME as UFULL_NAME,c.USER_NICKNAME as CFULL_NAME
         FROM
-        WK_ARTICLES w LEFT JOIN ORG_USER o on w.CREATE_USER = o.USER_CODE 
-        LEFT JOIN ORG_USER c on w.CREATE_USER = c.USER_CODE 
+        WK_ARTICLES w LEFT JOIN USER o on w.CREATE_USER = o.USER_CODE 
+        LEFT JOIN USER c on w.CREATE_USER = c.USER_CODE 
          WHERE w.ART_ID=#{artId}
     </select>
     
@@ -105,4 +114,9 @@
     <delete id="deleteArticle" parameterType="java.lang.String">
         delete from WK_ARTICLES where ART_ID = #{artId}
     </delete>
+    
+    <update id="updateMathchTime"  parameterType="java.lang.String">
+    	update WK_ARTICLES set  MATCH_TIMES=MATCH_TIMES+1
+        where ART_ID = #{artId}
+    </update>
 </mapper>

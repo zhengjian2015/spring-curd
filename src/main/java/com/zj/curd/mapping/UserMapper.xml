@@ -4,6 +4,7 @@
 
 <sql id="user_table_all_columns">
         user_id,
+        user_code,
         user_name,
         user_pass,
         user_nickname,

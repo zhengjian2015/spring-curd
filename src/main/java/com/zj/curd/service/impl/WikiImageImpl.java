@@ -8,10 +8,12 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.zj.curd.controller.WiKiContriller;
 import com.zj.curd.dao.WikiImagesDao;
 import com.zj.curd.entity.WkImages;
 import com.zj.curd.poi.Base64Utils;
@@ -22,7 +24,7 @@ import com.zj.curd.service.WikiImageService;
 
 @Service("wikiImageService")
 public class WikiImageImpl implements WikiImageService{
-	
+	private static Logger logger = Logger.getLogger(WikiImageImpl.class); 
 	@Autowired
 	private WikiImagesDao wikiImagesDao;
 
@@ -46,6 +48,11 @@ public class WikiImageImpl implements WikiImageService{
 		User user = (User) request.getSession().getAttribute("user");
 		String userName = user.getUserName();
 		wkImage.setCreateUser(userName);
+		//如果已经有了就不保存了
+		WkImages wkImagea = wikiImagesDao.getImageById(imgId);
+		if (wkImagea != null) {
+			return imgId;
+		}
 		int a = wikiImagesDao.saveImages(wkImage);
 		if (a != 1) {
 			imgId = "0";

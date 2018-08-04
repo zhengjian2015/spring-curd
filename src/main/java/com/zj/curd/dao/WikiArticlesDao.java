@@ -8,7 +8,7 @@ import com.zj.curd.entity.WkArticles;
 import com.zj.curd.entity.WkArticlesauthor;
 
 public interface WikiArticlesDao {
-	List<WkArticlesauthor> ListArticles(@Param(value="status") Integer status);
+	List<WkArticlesauthor> ListArticles(@Param(value="status") Integer status,@Param(value="list_qry") List<String> list_qry);
 	
 	WkArticlesauthor getArticleById(@Param(value="artId") String artId);
 	
@@ -17,5 +17,7 @@ public interface WikiArticlesDao {
 	int updateArticle(WkArticles WkArticle);
 	
 	int deleteArticle(@Param(value="artId") String artId);
+	
+	int updateMathchTime(@Param(value="artId") String artId);
 	
 }

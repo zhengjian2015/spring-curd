@@ -6,6 +6,8 @@ public class User {
     private Integer userId;
 
     private String userName;
+    
+    private String userCode;
 
     private String userPass;
 
@@ -119,6 +121,14 @@ public class User {
 				+ userNickname + ", userEmail=" + userEmail + ", userUrl=" + userUrl + ", userAvatar=" + userAvatar
 				+ ", userLastLoginIp=" + userLastLoginIp + ", userRegisterTime=" + userRegisterTime
 				+ ", userLastLoginTime=" + userLastLoginTime + ", userStatus=" + userStatus + "]";
+	}
+
+	public String getUserCode() {
+		return userCode;
+	}
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
 	}
     
     

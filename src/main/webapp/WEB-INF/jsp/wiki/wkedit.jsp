@@ -34,7 +34,7 @@
 	var testEditor;
 	var path;
     jQuery(function() {
-        var markdoc = jQuery('#ART_CONTENT').val();
+        var markdoc = jQuery('#ART_CONTENT').html();
         path = $("#pacher").val();
         testEditor = editormd("test-editormd", {
             width: "100%",
