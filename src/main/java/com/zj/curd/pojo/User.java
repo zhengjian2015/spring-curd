@@ -115,20 +115,20 @@ public class User {
         this.userStatus = userStatus;
     }
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", userPass=" + userPass + ", userNickname="
-				+ userNickname + ", userEmail=" + userEmail + ", userUrl=" + userUrl + ", userAvatar=" + userAvatar
-				+ ", userLastLoginIp=" + userLastLoginIp + ", userRegisterTime=" + userRegisterTime
-				+ ", userLastLoginTime=" + userLastLoginTime + ", userStatus=" + userStatus + "]";
-	}
-
 	public String getUserCode() {
 		return userCode;
 	}
 
 	public void setUserCode(String userCode) {
 		this.userCode = userCode;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + ", userCode=" + userCode + ", userPass=" + userPass
+				+ ", userNickname=" + userNickname + ", userEmail=" + userEmail + ", userUrl=" + userUrl
+				+ ", userAvatar=" + userAvatar + ", userLastLoginIp=" + userLastLoginIp + ", userRegisterTime="
+				+ userRegisterTime + ", userLastLoginTime=" + userLastLoginTime + ", userStatus=" + userStatus + "]";
 	}
     
     

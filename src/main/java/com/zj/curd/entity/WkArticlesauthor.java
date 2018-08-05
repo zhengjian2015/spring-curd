@@ -4,6 +4,8 @@ public class WkArticlesauthor extends WkArticles{
 	private String createfullName;
 
 	private String updatefullName;
+	
+	private Boolean canDeal;
 
 	public String getCreatefullName() {
 		return createfullName;
@@ -21,5 +23,13 @@ public class WkArticlesauthor extends WkArticles{
 		this.updatefullName = updatefullName;
 	}
 
+	public Boolean getCanDeal() {
+		return canDeal;
+	}
+
+	public void setCanDeal(Boolean canDeal) {
+		this.canDeal = canDeal;
+	}
+	
 	
 }

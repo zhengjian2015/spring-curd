@@ -111,7 +111,7 @@
                                             <i class="icon-user-md"></i>${artldata.updatefullName}
                                         </li>
                                         <li><i class="icon-calendar"></i> ${artldata.createTime}<BR>
-                                            <i class="icon-calendar"></i> ${artldata.createTime}
+                                            <i class="icon-calendar"></i> ${artldata.updateTime}
                                         </li>
                                     </ul>
                                 </div>

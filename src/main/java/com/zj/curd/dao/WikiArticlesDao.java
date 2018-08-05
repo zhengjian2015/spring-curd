@@ -29,4 +29,6 @@ public interface WikiArticlesDao {
 	//tag±Í«©
 	List<String> getTags(@Param(value="status") Integer status);
 	
+	
+	
 }

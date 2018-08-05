@@ -40,6 +40,15 @@ public class WikiArticlesServiceImpl implements WikiArticlesService{
 			str_qry = Arrays.asList(splited);
 		}
 		List<WkArticlesauthor> wkArticles = wikiArticlesDao.ListArticles(status,str_qry,tag);
+		for (WkArticlesauthor wk:wkArticles) {
+			String currentUser = (String) request.getSession().getAttribute("user_code");
+			String author = wk.getCreateUser();
+			//如果当前人员和作者是同一人就能删除
+			if(currentUser.equals(author))
+				wk.setCanDeal(true);
+			else
+				wk.setCanDeal(false);
+		}
 		PageInfo page = new PageInfo(wkArticles);
 		return page;
 	}

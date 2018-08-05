@@ -1,5 +1,7 @@
 package com.zj.curd.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -25,6 +27,12 @@ public class UserServiceImpl implements IUserService {
 	public void updateUser(User user) {
 		// TODO Auto-generated method stub
 		userDao.updateByPrimaryKeySelective(user);
+	}
+
+	@Override
+	public List<User> getUserCodes() {
+		// TODO Auto-generated method stub
+		return userDao.getUserCodes();
 	}
 
 }

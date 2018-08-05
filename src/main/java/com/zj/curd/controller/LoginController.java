@@ -55,6 +55,7 @@ public class LoginController {
             map.put("msg","");
             //添加session
             request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("user_code", user.getUserCode());          
             //添加cookie
             if(rememberme!=null) {
                 //创建两个Cookie对象

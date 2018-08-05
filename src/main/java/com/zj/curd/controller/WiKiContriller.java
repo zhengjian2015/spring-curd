@@ -28,6 +28,7 @@ import com.github.pagehelper.PageInfo;
 import com.zj.curd.entity.WkArticles;
 import com.zj.curd.entity.WkArticlesauthor;
 import com.zj.curd.pojo.User;
+import com.zj.curd.service.IUserService;
 import com.zj.curd.service.WikiArticlesService;
 import com.zj.curd.service.WikiImageService;
 import com.zj.curd.testmybatis.TestMyBatis;
@@ -42,6 +43,9 @@ public class WiKiContriller {
 	
 	@Resource
 	private WikiImageService wikiImageService;
+	
+	@Resource
+	private IUserService userService;
 	
 	
 	@RequestMapping("/wklist")
@@ -85,6 +89,11 @@ public class WiKiContriller {
 	@RequestMapping("/wkedit")
 	public String addArticle() {
 		return "wiki/wkedit";
+	}
+	
+	@RequestMapping("/wkmodiuser")
+	public String addModi() {
+		return "wiki/wkmodiuser";
 	}
 	
 	@RequestMapping(value="/art",method=RequestMethod.POST)
@@ -176,6 +185,14 @@ public class WiKiContriller {
 		 String imgData = wikiImageService.getImageData(ids);
 		 //imgData是base64,需要解码为byte
 		 return Base64.decodeBase64(imgData);
+		 
+	 }
+	 
+	 @RequestMapping(value="/modiusers",method=RequestMethod.GET)
+	 @ResponseBody
+	 public List<User> getModiUsers(HttpServletRequest request) {
+		 List<User> users = userService.getUserCodes();
+		 return users;
 		 
 	 }
 }
