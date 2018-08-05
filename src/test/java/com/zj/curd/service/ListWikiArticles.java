@@ -3,7 +3,10 @@ package com.zj.curd.service;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
@@ -65,6 +68,19 @@ public class ListWikiArticles {
 		
 	}
 	
+	
+	@Test
+    public void wikiArticles4() {
+		List<String> tagList = new ArrayList<String>();
+		tagList= wikiArticlesDao.getTags(0);
+		logger.debug("*************************222");
+		logger.debug(tagList);
+		
+		
+		
+		
+	}
+	
 	@Test
 	public void testImage() {
 		String imgId = "7c222453a30c4b65710b2796ba59d66b";
@@ -77,8 +93,9 @@ public class ListWikiArticles {
     public void listWikiArticles() {
 		Integer status = 0;
 		List<String> str_qry = new ArrayList<String>();
-		str_qry.add("Web");
-		List<WkArticlesauthor> wkArticlesauthor= wikiArticlesDao.ListArticles(status, str_qry);
+		str_qry.add("¹þ¹þ");
+		String  tag = "ÎÒµÄ°®ÈË";
+		List<WkArticlesauthor> wkArticlesauthor= wikiArticlesDao.ListArticles(status, str_qry,tag);
 		logger.debug("*************************000");
 		for(WkArticlesauthor wk : wkArticlesauthor) {
 			logger.debug(wk);

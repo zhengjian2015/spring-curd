@@ -42,4 +42,11 @@
 	         </div>
 	       </c:forEach>
     </c:if>
+    <c:if test="${not empty tags}"></c:if>
+        <h3>Tags</h3>
+            <ul class="unstyled inline sidebar-tags">
+                <c:forEach items="${tags}" var="t">
+                    <li><a href="${pageContext.request.contextPath}/wiki/wklist?tag=${t}"><i class="icon-tags"></i> ${t}</a></li>
+                </c:forEach>
+            </ul>
 </div>

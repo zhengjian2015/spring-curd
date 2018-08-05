@@ -50,8 +50,10 @@ public class WiKiContriller {
 		ModelAndView modelAndView = new ModelAndView();
 		PageInfo<WkArticlesauthor> page = wikiArticlesService.ListArticles(request,pn,0);
 		List<WkArticles> wkArticlesHot = wikiArticlesService.hotWkArticles(0);
+		List<String> tags = wikiArticlesService.getTags(0);
 		logger.debug("page "+page);
 		modelAndView.addObject("hotart",wkArticlesHot);
+		modelAndView.addObject("tags",tags);
 		modelAndView.addObject("pageInfo",page);
 		modelAndView.setViewName("/wiki/wklist");
 		return modelAndView;

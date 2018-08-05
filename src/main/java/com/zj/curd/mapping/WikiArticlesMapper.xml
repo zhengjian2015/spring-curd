@@ -68,6 +68,9 @@
             <if test="status!=null">
                 AND w.STATUS=#{status}
             </if>
+            <if test="tag!=null">
+                AND w.ART_KEYWORDS like '%${tag}%'
+            </if>
             <if test ="list_qry!=null">
 	            <foreach collection="list_qry" item="str_qry">
 		            <if test ="str_qry !=null and str_qry !='' ">
@@ -146,5 +149,18 @@
 			</if>
         </where>
          ORDER BY MATCH_TIMES  DESC LIMIT 0,10
+    </select>
+    
+    <!--获取Tags-->
+    <select id="getTags" parameterType="java.lang.Integer" resultType="String" >
+        SELECT ART_KEYWORDS FROM
+        WK_ARTICLES
+        <!-- where标签相当于where关键字，可以自动去除第一个and -->
+        <where>
+	        <if test="status!=null">
+	        	STATUS=#{status}
+	        </if>
+	    </where>
+	    GROUP BY ART_KEYWORDS ORDER BY count(*) DESC
     </select>
 </mapper>

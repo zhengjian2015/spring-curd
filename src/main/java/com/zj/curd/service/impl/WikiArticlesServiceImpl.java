@@ -32,13 +32,14 @@ public class WikiArticlesServiceImpl implements WikiArticlesService{
 		// TODO Auto-generated method stub
 		PageHelper.startPage(pn, 5);
 		String str_qrys = request.getParameter("qry");
+		String tag = request.getParameter("tag");
 		List<String> str_qry = null;
 		logger.debug("str_qry:"+str_qrys);
 		if (str_qrys != null) {
 			String[] splited = str_qrys.split("\\s+");//这样写就可以了 多个空格
 			str_qry = Arrays.asList(splited);
 		}
-		List<WkArticlesauthor> wkArticles = wikiArticlesDao.ListArticles(status,str_qry);
+		List<WkArticlesauthor> wkArticles = wikiArticlesDao.ListArticles(status,str_qry,tag);
 		PageInfo page = new PageInfo(wkArticles);
 		return page;
 	}
@@ -120,6 +121,13 @@ public class WikiArticlesServiceImpl implements WikiArticlesService{
 		}
 		List<WkArticles> wkArticles = wikiArticlesDao.listrelaWkArticles(0, KeywordsList, artId);
 		return wkArticles;
+	}
+
+	@Override
+	public List<String> getTags(Integer status) {
+		// TODO Auto-generated method stub
+		List<String> tags = wikiArticlesDao.getTags(0);
+		return tags;
 	}
 
 

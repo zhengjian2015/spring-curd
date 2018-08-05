@@ -27,4 +27,6 @@ public interface WikiArticlesService {
 	List<WkArticles> hotWkArticles(Integer status);
 	
 	List<WkArticles> listrelaWkArticles(WkArticles wkArticle);
+	
+	List<String> getTags(Integer status);
 }
