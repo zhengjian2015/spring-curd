@@ -31,7 +31,7 @@ import com.zj.curd.pojo.User;
 import com.zj.curd.service.IUserService;
 import com.zj.curd.service.WikiArticlesService;
 import com.zj.curd.service.WikiImageService;
-import com.zj.curd.testmybatis.TestMyBatis;
+
 
 
 @Controller

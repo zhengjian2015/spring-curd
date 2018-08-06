@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>新建文章</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/lib/wiki/static/css/style.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/lib/wiki/static/css/editormd.min.css" />

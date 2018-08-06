@@ -1,5 +1,7 @@
 package com.zj.curd.controller;
 
+import java.net.InetAddress;
+
 //import static com.zj.blog.util.Functions.getIpAddr;
 
 import java.util.Date;
@@ -68,7 +70,9 @@ public class LoginController {
                 response.addCookie(pwdCookie);
             }
         user.setUserLastLoginTime(new Date());
-        user.setUserLastLoginIp("127.0.0.1");
+        InetAddress address = InetAddress.getLocalHost();//获取的是本地的IP地址 //PC-20140317PXKX/192.168.0.121
+        String hostAddress = address.getHostAddress();//192.168.0.121     
+        user.setUserLastLoginIp(hostAddress);
         userService.updateUser(user);
 
         }
