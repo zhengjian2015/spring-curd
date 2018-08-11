@@ -42,9 +42,10 @@ public class ListWikiArticles {
     public void wikiArticles() {
 		String artId = "db8282c61e5745c1b94592e0a8cf7166";
 		WkArticlesauthor wkArticlesauthor= wikiArticlesService.getWkArticle(artId);
+		WkArticlesauthor wkArticlesauthor2= wikiArticlesService.getWkArticle(artId);
 		logger.debug("*************************000");
 		logger.debug(wkArticlesauthor);
-		logger.debug(wkArticlesauthor.getCreatefullName());
+		logger.debug(wkArticlesauthor2);
 		
 	}
 	
@@ -63,8 +64,11 @@ public class ListWikiArticles {
 		KeywordsList.add("aa");
 		String artId="1aa";
 		List<WkArticles> wkArticlesauthor= wikiArticlesDao.listrelaWkArticles(0, KeywordsList, artId);
+		List<WkArticles> wkArticlesauthor2= wikiArticlesDao.listrelaWkArticles(0, KeywordsList, artId);
 		logger.debug("*************************000");
+		
 		logger.debug(wkArticlesauthor);
+		logger.debug(wkArticlesauthor2);
 		
 	}
 	

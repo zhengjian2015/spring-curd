@@ -30,7 +30,7 @@
                     <div class="control-group">
                         <label class="control-label-small">可修改人</label>
                         <div class="controls-large">
-                            <input type="hidden" id="ART_ID" name="ART_ID" />
+                            <input type="hidden" id="ART_ID" name="ART_ID" value="${artId}" />
                             <input type="text" class="span11 m-wrap select2" id="canmodiusers" name="canmodiusers" />
                         </div>
                     </div>
@@ -60,5 +60,28 @@ $(function(){
     });
 	jQuery("#canmodiusers").select2({tags: arrayIdValue});
 });
+
+function mdlsel_savecanmodiusers() {
+	if (jQuery("#canmodiusers").val() =="" || !jQuery("#canmodiusers").val()) {
+		alert("请输入权限人！");
+		return false;
+	}
+	jQuery.ajax({
+        type: "POST",
+        url: "${pageContext.request.contextPath}/wiki/modiusers",
+        data: { "artId": jQuery('#ART_ID').val(), "canmodiUsers":jQuery("#canmodiusers").val() },
+        async: false,
+        success: function(data) {
+        	if (data.code=200) {
+                alert(data.msg);
+                window.location.href="${pageContext.request.contextPath}/wiki/wklist";
+            } 
+        	else if (data.code!=200) {
+                alert(data.msg);
+            }
+        }
+    });
+	
+}
 </script>
 </html>

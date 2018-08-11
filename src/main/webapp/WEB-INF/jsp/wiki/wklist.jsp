@@ -44,7 +44,7 @@ function delAction(id) {
     }
 }
 function showModiusers(id) {
-    	window.location.href="${pageContext.request.contextPath}/wiki/wkmodiuser";
+    	window.location.href="${pageContext.request.contextPath}/wiki/wkmodiuser/"+id;
 }
 </script>
 </head>
@@ -77,10 +77,10 @@ function showModiusers(id) {
 							<div class="span6 blog-tag-data-inner">
 								<ul class="unstyled inline">
 									<c:if test="${a.canDeal == true}"> 	                     
-										<li><a href="javascript:showModiusers(12)" class="tooltips" data-original-title="aaa"><i class="icon-group"></i> 权限</a></li>
+										<li><a href="javascript:showModiusers('${a.artId}')" class="tooltips" data-original-title="aaa"><i class="icon-group"></i> 权限</a></li>
 										<li><a href="javascript:delAction('${a.artId}')"><i class="icon-trash"></i> 删除</a></li>
 									</c:if>
-									<c:if test="${a.canDeal == true}"> 	  
+									<c:if test="${a.canModi == true}"> 	  
 										<li><a href="${pageContext.request.contextPath}/wiki/wkedit/${a.artId}"><i class="icon-edit"></i> 编辑</a></li>
 									</c:if>
 									<li><i class="icon-user"></i>${a.updatefullName}</li>

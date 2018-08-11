@@ -1,5 +1,6 @@
 package com.zj.curd.service.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -44,10 +45,21 @@ public class WikiArticlesServiceImpl implements WikiArticlesService{
 			String currentUser = (String) request.getSession().getAttribute("user_code");
 			String author = wk.getCreateUser();
 			//如果当前人员和作者是同一人就能删除
-			if(currentUser.equals(author))
+			if(currentUser.equals(author)) {
 				wk.setCanDeal(true);
-			else
+			    wk.setCanModi(true);
+			}
+			else {
 				wk.setCanDeal(false);
+				wk.setCanModi(false);
+				String canModiUsers = wk.getCanmodiUsers();
+				//关于是否有权限编辑的判断
+				if (canModiUsers!=null && canModiUsers!="") {
+					List<String> modiUserList = Arrays.asList(canModiUsers.split(","));
+					if(modiUserList.contains(currentUser))
+						wk.setCanModi(true);
+				}
+			}
 		}
 		PageInfo page = new PageInfo(wkArticles);
 		return page;
@@ -121,13 +133,15 @@ public class WikiArticlesServiceImpl implements WikiArticlesService{
 	@Override
 	public List<WkArticles> listrelaWkArticles(WkArticles wkArticle) {
 		
-		String Keywords = wkArticle.getArtKeywords();
-		List<String> KeywordsList = null;
+		List<String> KeywordsList = new ArrayList<String>();
 		String artId = wkArticle.getArtId();
-		if (Keywords != null) {
+		System.out.println("***"+artId);
+		if (wkArticle.getArtKeywords() != null) {
+			String Keywords = wkArticle.getArtKeywords();
 			String[] Keywordsed = Keywords.split("\\s+");//这样写就可以了 多个空格
 			KeywordsList = Arrays.asList(Keywordsed);
 		}
+		
 		List<WkArticles> wkArticles = wikiArticlesDao.listrelaWkArticles(0, KeywordsList, artId);
 		return wkArticles;
 	}
@@ -137,6 +151,20 @@ public class WikiArticlesServiceImpl implements WikiArticlesService{
 		// TODO Auto-generated method stub
 		List<String> tags = wikiArticlesDao.getTags(0);
 		return tags;
+	}
+
+
+	@Override
+	public Map<String, Object> saveModiUsers(String artId, String canmodiUsers) {
+		Map<String,Object>  map = new HashMap<>();
+		int i = wikiArticlesDao.saveModiUsers(artId,canmodiUsers);
+		map.put("code", 101);
+		map.put("msg", "失败");
+		if (i >0) {
+		map.put("code", 200);
+		map.put("msg", "成功");
+		}
+		return map;
 	}
 
 

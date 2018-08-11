@@ -28,6 +28,8 @@ public interface WikiArticlesDao {
 	
 	//tag±Í«©
 	List<String> getTags(@Param(value="status") Integer status);
+
+	int saveModiUsers(@Param(value="artId") String artId,@Param(value="canmodiUsers") String canmodiUsers);
 	
 	
 	

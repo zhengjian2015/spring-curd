@@ -74,6 +74,8 @@
            jQuery(function() {
         	   var arid = $("#arid").val();
         	   var apath = $("#apath").val();
+        	   console.log("**"+apath);
+        	   showOrHideCatalog();
                jQuery.get(apath+"/wiki/art/"+arid, function(jsondata) {
             	   
                    console.log(jsondata);

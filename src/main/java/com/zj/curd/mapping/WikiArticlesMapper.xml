@@ -123,6 +123,11 @@
         where ART_ID = #{artId}
     </update>
     
+    <update id="saveModiUsers"  parameterType="java.lang.String">
+    	update WK_ARTICLES set  CANMODI_USERS=#{canmodiUsers}
+        where ART_ID = #{artId}
+    </update>
+    
     <!--热门文章-->
     <select id="hotWkArticles" parameterType="java.lang.Integer" resultMap="ArticleResult">
         SELECT * FROM  WK_ARTICLES WHERE STATUS=#{status} ORDER BY MATCH_TIMES DESC LIMIT 0,5 	

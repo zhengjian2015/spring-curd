@@ -60,6 +60,8 @@ public class WiKiContriller {
 		modelAndView.addObject("tags",tags);
 		modelAndView.addObject("pageInfo",page);
 		modelAndView.setViewName("/wiki/wklist");
+		String destFilePath3 = request.getSession().getServletContext().getRealPath("/");
+
 		return modelAndView;
 		
 	}
@@ -69,7 +71,6 @@ public class WiKiContriller {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		WkArticlesauthor artldata = wikiArticlesService.getWkArticle(id);
-		List<WkArticles> wkArticlesHot = wikiArticlesService.listrelaWkArticles(artldata);
 		//¸üÐÂwatchtime
 		wikiArticlesService.updateMathchTime(id);
 		List<WkArticles> wkArticlesRelist = wikiArticlesService.listrelaWkArticles(artldata);
@@ -91,8 +92,9 @@ public class WiKiContriller {
 		return "wiki/wkedit";
 	}
 	
-	@RequestMapping("/wkmodiuser")
-	public String addModi() {
+	@RequestMapping("/wkmodiuser/{id}")
+	public String addModi(@PathVariable(value="id") String id,Model model) {
+		model.addAttribute("artId",id);
 		return "wiki/wkmodiuser";
 	}
 	
@@ -112,7 +114,6 @@ public class WiKiContriller {
 		article.setMathchTimes(1);
 		Map<String,Object> map = new HashMap<String, Object>();
 		map = wikiArticlesService.saveWkArticle(article);
-		System.out.println(map);
 		return map;
 	}
 	
@@ -193,6 +194,17 @@ public class WiKiContriller {
 	 public List<User> getModiUsers(HttpServletRequest request) {
 		 List<User> users = userService.getUserCodes();
 		 return users;
+		 
+	 }
+	 
+	 @RequestMapping(value="/modiusers",method=RequestMethod.POST)
+	 @ResponseBody
+	 public Map<String,Object> saveModiUsers(HttpServletRequest request,WkArticles wkArticles) {
+		 Map<String,Object> result = new HashMap<String,Object>();
+		 String artId = wkArticles.getArtId();
+		 String canmodiUsers = wkArticles.getCanmodiUsers();
+		 result = wikiArticlesService.saveModiUsers(artId,canmodiUsers);
+		 return result;
 		 
 	 }
 }

@@ -95,7 +95,7 @@
                                     <ul class="unstyled inline blog-tags">
                                         <li>
                                             <i class="icon-tags"></i>
-                                            <a href="${pageContext.request.contextPath}/wiki/wklist/tag/${artldata.artKeywords}">${artldata.artKeywords}</a>
+                                            <a href="${pageContext.request.contextPath}/wiki/wklist?tag=${artldata.artKeywords}">${artldata.artKeywords}</a>
                                         </li>
                                     </ul>
                                     <ul class="unstyled inline blog-tags">
@@ -135,6 +135,7 @@
 var testEditormdView;
 
 $(function(){
+	showOrHideCatalog();
 	console.log(jQuery('#ART_CONTENT').html());
 	testEditormdView = editormd.markdownToHTML("test-editormd-view", {
         markdown        : jQuery('#ART_CONTENT').html(),

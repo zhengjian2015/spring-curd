@@ -7,6 +7,8 @@ public class WkArticlesauthor extends WkArticles{
 	
 	private Boolean canDeal;
 
+	private Boolean canModi;
+	
 	public String getCreatefullName() {
 		return createfullName;
 	}
@@ -29,6 +31,14 @@ public class WkArticlesauthor extends WkArticles{
 
 	public void setCanDeal(Boolean canDeal) {
 		this.canDeal = canDeal;
+	}
+
+	public Boolean getCanModi() {
+		return canModi;
+	}
+
+	public void setCanModi(Boolean canModi) {
+		this.canModi = canModi;
 	}
 	
 	

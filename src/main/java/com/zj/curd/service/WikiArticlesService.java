@@ -29,4 +29,6 @@ public interface WikiArticlesService {
 	List<WkArticles> listrelaWkArticles(WkArticles wkArticle);
 	
 	List<String> getTags(Integer status);
+
+	Map<String, Object> saveModiUsers(String artId, String canmodiUsers);
 }
