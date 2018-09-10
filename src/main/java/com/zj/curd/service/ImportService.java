@@ -9,7 +9,7 @@ public interface ImportService {
      * 读取excel中的数据,生成list 
 	 * @throws Exception 
      */  
-    Map readExcelFile(MultipartFile file);
+    int readExcelFile(MultipartFile file) throws Exception;
     
     void updateExcelFile();
 }

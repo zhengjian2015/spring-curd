@@ -27,6 +27,8 @@ public class testRedis {
 	public void testComp(){
 		
 		List<Company> companys = companyService.getCompanys();
-		logger.debug(companys);
+		for(Company company:companys) {
+			logger.debug(company.getCompanyName());
+		}
 	}
 }

@@ -68,13 +68,16 @@ function submitImport() {
             type: "POST",
             url: "${pageContext.request.contextPath}/improtExcel",
             async:false,
-            success: function (data1) {
-                console.log(data1);
-            	if(data1.code == 200) {
-                alert("操作成功");
-                window.location.reload();
+            success: function (data) {
+            	console.log("*****"+ JSON.stringify(data));
+            	for(var i in data) {
+            		console.log(i);
+            	}
+            	if(data['success']) {
+                	alert("操作成功");
+                	window.location.reload();
                } else {
-                alert(data1.msg);
+                	alert(data.error);
                }
             },
         });
